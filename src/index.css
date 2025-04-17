@@ -23,12 +23,34 @@
   --text-base: clamp(0.875rem, 0.829rem + 0.19vw, 1rem); /*16-14*/
   --text-lg: clamp(1rem, 0.907rem + 0.381vw, 1.25rem); /*20-16*/
   --text-xl: clamp(2rem, 1.814rem + 0.762vw, 2.5rem); /*40-32*/
-  --text-xl2: clamp(2rem, 1.629rem + 1.524vw, 3rem); /*48-32*/
-  --text-xl3: clamp(2.25rem, 1.6rem + 2.667vw, 4rem); /*64-36*/
+  --text-2xl: clamp(2rem, 1.629rem + 1.524vw, 3rem); /*48-32*/
+  --text-3xl: clamp(2.25rem, 1.6rem + 2.667vw, 4rem); /*64-36*/
+
+  --text-logo: clamp(1.5rem, 1.314rem + 0.762vw, 2rem); /*32-24*/
+
+  /*   SPACING   */
+  --spacing-container: clamp(1rem, -0.95rem + 8vw, 6.25rem);
+
+  /*   OTHER   */
+
+  /*header height*/
+  --header-h: calc(var(--spacing) * 16);
+  --md-header-h: calc(var(--spacing) * 24);
+  
 }
 
 @layer base {
   body {
+    color: var(--color-primary);
+    background: var(--color-white);
     font-family: var(--font-satoshi);
+    font-size: var(--text-base);
+  }
+}
+
+@layer utility {
+  /*   ANIMATIONS   */
+  .animate-close {
+    @apply opacity-0 -translate-y-full transition-all duration-500 h-0;
   }
 }
