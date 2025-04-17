@@ -1,1 +1,34 @@
+@import url(../src/fonts/fonts.css);
+
 @import "tailwindcss";
+
+@theme {
+  /*   FONTS   */
+
+  --font-satoshi: "Satoshi", sans-serif;
+  --font-integralcf: "IntegralCF", sans-serif;
+
+  /*   COLORS   */
+
+  --color-bg-color: #ffffff;
+  --color-primary: #000000;
+  --color-secondary: #f0eeed;
+  --color-star-yellow: #ffc633;
+  --color-discount: #ff3333;
+  --color-green: #01ab31;
+
+  /*   SIZES   */
+
+  --text-sm: clamp(0.75rem, 0.704rem + 0.19vw, 0.875rem); /*14-12*/
+  --text-base: clamp(0.875rem, 0.829rem + 0.19vw, 1rem); /*16-14*/
+  --text-lg: clamp(1rem, 0.907rem + 0.381vw, 1.25rem); /*20-16*/
+  --text-xl: clamp(2rem, 1.814rem + 0.762vw, 2.5rem); /*40-32*/
+  --text-xl2: clamp(2rem, 1.629rem + 1.524vw, 3rem); /*48-32*/
+  --text-xl3: clamp(2.25rem, 1.6rem + 2.667vw, 4rem); /*64-36*/
+}
+
+@layer base {
+  body {
+    font-family: var(--font-satoshi);
+  }
+}
