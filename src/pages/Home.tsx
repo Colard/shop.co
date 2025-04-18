@@ -1,8 +1,14 @@
+import Hero from "../sections/Hero";
+
 interface HomeProps
   extends Omit<React.ComponentPropsWithoutRef<"div">, "children"> {}
 
 let Home: React.FC<HomeProps> = () => {
-  return <>Home</>;
+  return (
+    <>
+      <Hero />
+    </>
+  );
 };
 
 export default Home;

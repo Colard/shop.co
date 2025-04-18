@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Container from "../components/Container";
+import { tw } from "../utils/tailwindFunctions";
 
 let PromoBar: React.FC = () => {
   const [visible, setVisible] = React.useState(false);
@@ -24,11 +25,9 @@ let PromoBar: React.FC = () => {
 
   return (
     <div
-      className={
-        "bg-primary sticky h-8 w-full sm:h-10 " +
-        (visible ? "" : "hidden") +
-        (isClosing ? "animate-close" : "")
-      }
+      className={tw`bg-primary relative h-8 w-full sm:h-10 ${visible ? "" : "hidden"} ${
+        isClosing ? "animate-close" : ""
+      }`}
     >
       <Container className="flex items-center justify-end">
         <p className="text-bg-color absolute inset-0 flex items-center justify-center text-sm">

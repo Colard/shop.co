@@ -35,7 +35,7 @@ const Header: React.FC = () => {
   const darkModeToggler = useDarkMode();
 
   return (
-    <header className="h-header md:h-md-header bg-bg-color sticky top-0 z-50">
+    <header className="h-header md:h-md-header bg-bg-color top-0 z-50">
       <Container className="flex items-center justify-between">
         <div className="flex h-full items-center lg:gap-10">
           <nav className="h-full lg:order-1 lg:h-auto">
