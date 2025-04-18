@@ -1,3 +1,4 @@
+import Brands from "../sections/Brands";
 import Hero from "../sections/Hero";
 
 interface HomeProps
@@ -7,6 +8,7 @@ let Home: React.FC<HomeProps> = () => {
   return (
     <>
       <Hero />
+      <Brands />
     </>
   );
 };
