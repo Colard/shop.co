@@ -25,13 +25,13 @@ let PromoBar: React.FC = () => {
   return (
     <div
       className={
-        "w-full h-8 sm:h-10 bg-primary sticky " +
-        (visible ? "" : "hidden ") +
-        (isClosing ? "animate-close " : "")
+        "bg-primary sticky h-8 w-full sm:h-10 " +
+        (visible ? "" : "hidden") +
+        (isClosing ? "animate-close" : "")
       }
     >
-      <Container className="flex justify-end items-center">
-        <p className="text-sm text-white absolute inset-0 flex items-center justify-center">
+      <Container className="flex items-center justify-end">
+        <p className="text-bg-color absolute inset-0 flex items-center justify-center text-sm">
           Sign up and get 20% off to your first order.&nbsp;
           <a
             href="#"
@@ -40,9 +40,9 @@ let PromoBar: React.FC = () => {
             Sign Up Now
           </a>
         </p>
-        <div className="size-5 relative hidden sm:block" onClick={dismiss}>
-          <span className="h-0.5 w-[90%] bg-bg-color block transform rotate-45 absolute inset-0 m-auto"></span>
-          <span className="h-0.5 w-[90%] bg-bg-color block transform -rotate-45 absolute inset-0 m-auto"></span>
+        <div className="relative hidden size-5 sm:block" onClick={dismiss}>
+          <span className="bg-bg-color absolute inset-0 m-auto block h-0.5 w-[90%] rotate-45 transform"></span>
+          <span className="bg-bg-color absolute inset-0 m-auto block h-0.5 w-[90%] -rotate-45 transform"></span>
         </div>
       </Container>
     </div>

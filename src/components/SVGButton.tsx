@@ -14,7 +14,10 @@ let SVGButton: React.FC<SVGButtonProps> = ({
 }) => {
   return (
     <div
-      className={`flex items-center justify-center cursor-pointer ${className || ""}`}
+      onClick={onClick}
+      className={`flex cursor-pointer items-center justify-center select-none ${
+        className || ""
+      }`}
       {...rest}
     >
       {svg}

@@ -29,20 +29,32 @@
   --text-logo: clamp(1.5rem, 1.314rem + 0.762vw, 2rem); /*32-24*/
 
   /*   SPACING   */
+
+  /* container */
   --spacing-container: clamp(1rem, -0.95rem + 8vw, 6.25rem);
 
-  /*   OTHER   */
+  /* header */
+  --spacing-header: calc(var(--spacing) * 16);
+  --spacing-md-header: calc(var(--spacing) * 24);
 
-  /*header height*/
-  --header-h: calc(var(--spacing) * 16);
-  --md-header-h: calc(var(--spacing) * 24);
-  
+  /* side-menu */
+  --spacing-side-menu: calc(var(--spacing) * 60);
+}
+
+/*  DARK MODE   */
+@custom-variant dark (&:where(.dark, .dark *));
+@layer theme {
+  .dark {
+    --color-bg-color: #121212;
+    --color-primary: #ffffff;
+    --color-secondary: #1e1e1e;
+  }
 }
 
 @layer base {
   body {
     color: var(--color-primary);
-    background: var(--color-white);
+    background: var(--color-bg-color);
     font-family: var(--font-satoshi);
     font-size: var(--text-base);
   }
@@ -51,6 +63,6 @@
 @layer utility {
   /*   ANIMATIONS   */
   .animate-close {
-    @apply opacity-0 -translate-y-full transition-all duration-500 h-0;
+    @apply h-0 -translate-y-full opacity-0 transition-all duration-500;
   }
 }

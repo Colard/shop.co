@@ -37,7 +37,7 @@ let DarkModeIcon: React.FC<DarkModeIconProps> = ({ className, ...rest }) => {
             strokeLinecap: "butt",
             strokeLinejoin: "miter",
             strokeMiterlimit: 10,
-            fill: "rgb(0,0,0)",
+            fill: "currentColor",
             fillRule: "nonzero",
             opacity: 1,
           }}
