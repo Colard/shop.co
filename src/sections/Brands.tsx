@@ -8,12 +8,12 @@ import Container from "../components/Container";
 let Brands: React.FC = () => {
   return (
     <section className="bg-primary text-bg-color">
-      <Container className="flex flex-wrap items-center justify-around gap-5 py-10 xl:justify-between">
-        <VersaceIcon></VersaceIcon>
-        <ZaraIcon></ZaraIcon>
-        <GucciIcon></GucciIcon>
-        <PradaIcon></PradaIcon>
-        <CalvinKleinIcon></CalvinKleinIcon>
+      <Container className="flex flex-wrap items-center justify-around gap-x-2 gap-y-5 py-10 md:gap-5 xl:justify-between">
+        <VersaceIcon className="h-6 w-auto md:h-8"></VersaceIcon>
+        <ZaraIcon className="h-6.5 w-auto md:h-10"></ZaraIcon>
+        <GucciIcon className="h-6.5 w-auto md:h-9"></GucciIcon>
+        <PradaIcon className="h-5 w-auto md:h-8"></PradaIcon>
+        <CalvinKleinIcon className="h-5 w-auto md:h-8"></CalvinKleinIcon>
       </Container>
     </section>
   );
