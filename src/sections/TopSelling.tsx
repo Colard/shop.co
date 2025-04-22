@@ -4,6 +4,9 @@ import ItemsLine from "../components/ItemsLine";
 import useProductsApi, { useProductsApiProps } from "../hooks/userProductsApi";
 import Button from "../components/Button";
 
+interface TopSellingProps
+  extends Omit<React.ComponentPropsWithoutRef<"section">, "children"> {}
+
 const productsApiProps: useProductsApiProps = {
   sortBy: "discountPercentage",
   order: "desc",
@@ -11,7 +14,7 @@ const productsApiProps: useProductsApiProps = {
   select: ["id", "title", "thumbnail", "price", "discountPercentage", "rating"],
 };
 
-let TopSelling: React.FC = () => {
+let TopSelling: React.FC<TopSellingProps> = ({ className = "", ...rest }) => {
   const { products, loadMore } = useProductsApi(productsApiProps);
 
   const isMounted = React.useRef(false);
@@ -25,7 +28,10 @@ let TopSelling: React.FC = () => {
   return (
     <Container>
       <ItemsLine header="Top Selling" products={products} />
-      <Button className="bg-bg-color text-primary border-secondary mt-6 block h-13 w-full border-2 md:mx-auto md:mt-9 md:w-55">
+      <Button
+        className={`${className} bg-bg-color text-primary border-secondary mt-6 block h-13 w-full border-2 md:mx-auto md:mt-9 md:w-55`}
+        {...rest}
+      >
         View All
       </Button>
     </Container>

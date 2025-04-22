@@ -10,9 +10,9 @@ interface HomeProps
 let Home: React.FC<HomeProps> = () => {
   return (
     <>
-      <Hero />
+      <Hero className="md:pt-10" />
       <Brands />
-      <NewArrivals />
+      <NewArrivals className="pt-12 md:pt-18" />
       <Container>
         <hr className="border-primary/10 my-10 md:my-16" />
       </Container>

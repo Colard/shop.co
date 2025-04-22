@@ -25,7 +25,10 @@ const links = [
   },
 ];
 
-const Header: React.FC = () => {
+interface HeaderProps
+  extends Omit<React.ComponentPropsWithoutRef<"header">, "children"> {}
+
+const Header: React.FC<HeaderProps> = ({ className = "", ...rest }) => {
   const [isMenuOpened, setMenuOpened] = React.useState(false);
 
   const toggleMenu = () => {
@@ -35,7 +38,10 @@ const Header: React.FC = () => {
   const darkModeToggler = useDarkMode();
 
   return (
-    <header className="h-header md:h-md-header bg-bg-color top-0 z-50">
+    <header
+      className={`h-header md:h-md-header bg-bg-color top-0 z-50 ${className}`}
+      {...rest}
+    >
       <Container className="flex items-center justify-between">
         <div className="flex h-full items-center lg:gap-10">
           <nav className="h-full lg:order-1 lg:h-auto">

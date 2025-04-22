@@ -2,9 +2,15 @@ import Button from "../components/Button";
 import Container from "../components/Container";
 import heroSm from "../assets/images/Hero-sm.png";
 
-let Hero: React.FC = () => {
+interface HeroProps
+  extends Omit<React.ComponentPropsWithoutRef<"section">, "children"> {}
+
+let Hero: React.FC<HeroProps> = ({ className = "", ...rest }) => {
   return (
-    <section className="bg-secondary text-primary/60 flex h-full min-h-screen flex-col bg-cover bg-center bg-no-repeat md:bg-[url('src/assets/images/Hero.png')] md:pt-10">
+    <section
+      className={`${className} bg-secondary text-primary/60 flex h-full min-h-screen flex-col bg-cover bg-center bg-no-repeat md:bg-[url('src/assets/images/Hero.png')]`}
+      {...rest}
+    >
       <Container className="text-shadow-secondary mt-10 flex flex-1 flex-col justify-center text-shadow-md md:mt-0">
         <div className="max-w-180">
           <h1 className="font-integralcf text-primary text-4xl">

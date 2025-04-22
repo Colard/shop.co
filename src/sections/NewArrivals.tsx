@@ -11,7 +11,10 @@ const productsApiProps: useProductsApiProps = {
   select: ["id", "title", "thumbnail", "price", "discountPercentage", "rating"],
 };
 
-let NewArrivals: React.FC = () => {
+interface NewArrivalsProps
+  extends Omit<React.ComponentPropsWithoutRef<"section">, "children"> {}
+
+let NewArrivals: React.FC<NewArrivalsProps> = ({ className = "", ...rest }) => {
   const { products, loadMore } = useProductsApi(productsApiProps);
 
   const isMounted = React.useRef(false);
@@ -23,7 +26,7 @@ let NewArrivals: React.FC = () => {
   }, []);
 
   return (
-    <Container className="pt-12 md:pt-18">
+    <Container className={`${className}`} {...rest}>
       <ItemsLine header="New Arrivals" products={products} />
       <Button className="bg-bg-color text-primary border-secondary mt-6 block h-13 w-full border-2 md:mx-auto md:mt-9 md:w-55">
         View All
