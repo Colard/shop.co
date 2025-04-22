@@ -14,7 +14,7 @@ const StarRating: React.FC<StarRatingProps> = ({
   max = 5,
   ...rest
 }) => {
-  const starClassName = tw`-z-1 block aspect-square h-full mask-[url('src/assets/masks/star.svg')] mask-no-repeat`;
+  const starClassName = tw`block aspect-square h-full mask-[url('src/assets/masks/star.svg')] mask-no-repeat`;
 
   return (
     <div className={` ${className}`} {...rest}>
@@ -33,9 +33,9 @@ const StarRating: React.FC<StarRatingProps> = ({
 
           if (rating - i < 1 && rating - i > 0) {
             return (
-              <div key={i + "half"} className="-z-1 aspect-square h-full">
+              <div key={i + "half"} className="aspect-square h-full">
                 <div
-                  className="-z-1 h-full w-full overflow-hidden"
+                  className="h-full w-full overflow-hidden"
                   style={{ width: `${(rating - i) * 100}%` }}
                 >
                   <span className={`${starClassName} bg-star-yellow`} />

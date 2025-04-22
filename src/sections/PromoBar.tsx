@@ -27,7 +27,7 @@ let PromoBar: React.FC<PromoBarProps> = ({ className = "", ...rest }) => {
 
   return (
     <div
-      className={`${className} bg-primary relative h-8 w-full sm:h-10 ${visible ? "" : "hidden"} ${
+      className={`${className} bg-primary relative ${visible ? "" : "hidden"} ${
         isClosing ? "animate-close" : ""
       }`}
       {...rest}

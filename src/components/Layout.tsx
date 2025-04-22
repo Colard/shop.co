@@ -9,8 +9,8 @@ interface LayoutProps
 let Layout: React.FC<LayoutProps> = ({ className, ...rest }) => {
   return (
     <div {...rest} className="flex min-h-screen flex-col">
-      <div className="sticky top-0">
-        <PromoBar />
+      <div className="sticky top-0 z-50">
+        <PromoBar className="h-8 w-full sm:h-10" />
 
         <Header />
       </div>

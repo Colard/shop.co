@@ -27,13 +27,15 @@ let TopSelling: React.FC<TopSellingProps> = ({ className = "", ...rest }) => {
 
   return (
     <Container>
-      <ItemsLine header="Top Selling" products={products} />
-      <Button
-        className={`${className} bg-bg-color text-primary border-secondary mt-6 block h-13 w-full border-2 md:mx-auto md:mt-9 md:w-55`}
-        {...rest}
-      >
-        View All
-      </Button>
+      <section>
+        <ItemsLine header="Top Selling" products={products} />
+        <Button
+          className={`${className} bg-bg-color text-primary border-secondary mt-6 block h-13 w-full border-2 md:mx-auto md:mt-9 md:w-55`}
+          {...rest}
+        >
+          View All
+        </Button>
+      </section>
     </Container>
   );
 };
