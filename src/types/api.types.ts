@@ -3,8 +3,8 @@ export interface Product {
     title: string;
     price: number;
     description: string;
-    discountPercentage: string;
-    thumbail: string;
+    discountPercentage: number;
+    thumbnail: string;
     images: string[];
     tags: string[];
     warrantyInformation: string;

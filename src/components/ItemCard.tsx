@@ -1,12 +1,86 @@
-interface ItemCardProps
-  extends Omit<React.ComponentPropsWithoutRef<"article">, "children"> {}
+import React from "react";
+import StarRating from "./StarRating";
 
-let ItemCard: React.FC<ItemCardProps> = ({ className, ...rest }) => {
+interface ItemCardProps
+  extends Omit<React.ComponentPropsWithoutRef<"article">, "children" | "id"> {
+  id: number;
+  thumbnail: string;
+  rating: number;
+  title: string;
+  price: number;
+  discountPercentage: number;
+}
+
+let ItemCard: React.FC<ItemCardProps> = ({
+  id,
+  className = "",
+  thumbnail,
+  rating,
+  title,
+  price,
+  discountPercentage,
+  ...rest
+}) => {
   return (
-    <article className={`my-class ${className || ""}`} {...rest}>
-      <h3></h3>
+    <article className={`${className}`} {...rest}>
+      <a className="width-full block max-w-75 min-w-50 cursor-pointer">
+        <img
+          draggable={false}
+          className="bg-secondary size-full max-h-75 min-h-50 max-w-75 min-w-50 rounded-[1.25rem]"
+          src={thumbnail}
+          alt={title}
+        ></img>
+        <h3 className="line-clamp-2 text-lg font-bold wrap-anywhere">
+          {title}
+        </h3>
+        <div className="flex-between flex w-full items-center gap-1">
+          <StarRating
+            starContainerClassName="gap-1.5"
+            rating={+rating.toFixed(1)}
+            className="my-1 h-5 w-auto md:my-2"
+          />
+          <p className="text-primary text-sm">
+            {rating.toFixed(1)}/<span className="text-primary/60">5</span>
+          </p>
+        </div>
+        <Price price={price} discount={discountPercentage} />
+      </a>
     </article>
   );
 };
 
-export default ItemCard;
+interface PriceProps {
+  price: number;
+  discount: number;
+}
+
+let Price: React.FC<PriceProps> = ({ discount, price }) => {
+  let priceLabel;
+  discount = Math.floor(+discount);
+
+  // !!! ADDED FOR TESTING WITH API !!!
+  if (discount >= 10) {
+    const priceWithDiscount = (price * ((100 - discount) / 100)).toFixed(2);
+    priceLabel = (
+      <>
+        <p>${priceWithDiscount}</p>
+        {price.toString().length > 7 || (
+          <p className="text-old-price line-through">${price}</p>
+        )}
+        <div className="text-discount bg-discount/10 inline-flex items-center justify-center rounded-full px-2 py-1 text-xs font-medium md:px-2.5 md:py-1.5">
+          <p>-{discount}%</p>
+        </div>
+      </>
+    );
+  } else {
+    priceLabel = <p>${price}</p>;
+  }
+
+  return (
+    <div className="text-card flex flex-wrap items-center gap-[5px] font-bold md:gap-[10px]">
+      {priceLabel}
+    </div>
+  );
+};
+
+export default React.memo(ItemCard);

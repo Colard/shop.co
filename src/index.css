@@ -16,9 +16,10 @@
   --color-star-yellow: #ffc633;
   --color-discount: #ff3333;
   --color-green: #01ab31;
+  --color-old-price: #999999;
 
   /*   SIZES   */
-
+  --text-xs: clamp(0.625rem, 0.579rem + 0.19vw, 0.75rem); /*12-10*/
   --text-sm: clamp(0.75rem, 0.704rem + 0.19vw, 0.875rem); /*14-12*/
   --text-base: clamp(0.875rem, 0.829rem + 0.19vw, 1rem); /*16-14*/
   --text-lg: clamp(1rem, 0.907rem + 0.381vw, 1.25rem); /*20-16*/
@@ -27,6 +28,7 @@
   --text-3xl: clamp(2rem, 1.629rem + 1.524vw, 3rem); /*48-32*/
   --text-4xl: clamp(2.25rem, 1.6rem + 2.667vw, 4rem); /*64-36*/
 
+  --text-card: clamp(1.25rem, 1.157rem + 0.381vw, 1.5rem); /*24-20*/
   --text-logo: clamp(1.5rem, 1.314rem + 0.762vw, 2rem); /*32-24*/
 
   /*   SPACING   */
@@ -49,6 +51,7 @@
     --color-bg-color: #121212;
     --color-primary: #ffffff;
     --color-secondary: #1e1e1e;
+    --color-old-price: #555555;
   }
 }
 
@@ -59,11 +62,45 @@
     font-family: var(--font-satoshi);
     font-size: var(--text-base);
   }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--color-bg-color);
+    border-radius: 4px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background-color: var(--color-primary);
+  }
+
+  *::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary) var(--color-bg-color);
+  }
 }
 
 @layer utility {
   /*   ANIMATIONS   */
   .animate-close {
     @apply h-0 -translate-y-full opacity-0 transition-all duration-500;
+  }
+
+  /* NO SCROLLBAR */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }

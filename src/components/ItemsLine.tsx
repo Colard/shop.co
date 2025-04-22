@@ -1,29 +1,31 @@
-import React, { useEffect } from "react";
-import { Product } from "../api/api.types";
-
+import React from "react";
+import ItemsScroll from "./ItemsScroll";
+import { Product } from "../types/api.types";
+import ItemCard from "./ItemCard";
 interface ItemsLineProps
   extends Omit<React.ComponentPropsWithoutRef<"div">, "children"> {
   header: string;
+  products: Product[];
 }
 
-let NewArrivals: React.FC<ItemsLineProps> = ({
+let ItemsLine: React.FC<ItemsLineProps> = ({
   className = "",
   header,
+  products,
   ...rest
 }) => {
-  const [product, setProduct] = React.useState<Product[]>([]);
-
-  useEffect(() => {
-    fetch("https://dummyjson.com/products")
-      .then((res) => res.json())
-      .then((data) => setProduct(data.products));
-  }, []);
-  console.log(product);
   return (
-    <div className={`my-class ${className}`} {...rest}>
-      <h2 className="font-integralcf text-primary text-3xl">{header}</h2>
+    <div className={`${className}`} {...rest}>
+      <h2 className="font-integralcf text-primary mb-14 text-center text-3xl">
+        {header}
+      </h2>
+      <ItemsScroll
+        extractKey={(item) => item.id}
+        elements={products}
+        renderFunction={(item) => <ItemCard key={item.id} {...item} />}
+      ></ItemsScroll>
     </div>
   );
 };
 
-export default NewArrivals;
+export default ItemsLine;
