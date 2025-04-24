@@ -69,6 +69,8 @@
     background: var(--color-bg-color);
     font-family: var(--font-satoshi);
     font-size: var(--text-base);
+
+    scroll-behavior: smooth;
   }
 
   *::-webkit-scrollbar {

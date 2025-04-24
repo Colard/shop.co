@@ -36,7 +36,7 @@ let ItemCard: React.FC<ItemCardProps> = ({
         <h3 className="line-clamp-2 text-lg font-bold wrap-anywhere">
           {title}
         </h3>
-        <div className="flex-between flex w-full items-center gap-1">
+        <div className="flex w-full items-center gap-1">
           <StarRating
             starContainerClassName="gap-1.5"
             rating={+rating.toFixed(1)}

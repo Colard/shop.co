@@ -4,6 +4,7 @@ import Hero from "../sections/Hero";
 import Container from "../components/Container";
 import TopSelling from "../sections/TopSelling";
 import DressStyles from "../sections/DressStyles";
+import CommentsCarousel from "../sections/CommentsCarousel";
 
 interface HomeProps
   extends Omit<React.ComponentPropsWithoutRef<"div">, "children"> {}
@@ -19,6 +20,7 @@ let Home: React.FC<HomeProps> = () => {
       </Container>
       <TopSelling />
       <DressStyles className="pt-12 lg:pt-20" />
+      <CommentsCarousel className="mt-12 mb-12 md:mt-20 md:mb-20" />
     </>
   );
 };

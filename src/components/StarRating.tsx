@@ -17,7 +17,7 @@ const StarRating: React.FC<StarRatingProps> = ({
   const starClassName = tw`block aspect-square h-full mask-[url('src/assets/masks/star.svg')] mask-no-repeat`;
 
   return (
-    <div className={` ${className}`} {...rest}>
+    <div className={`${className}`} {...rest}>
       <div
         className={`pointer-events-none flex h-full w-full justify-between ${starContainerClassName}`}
       >

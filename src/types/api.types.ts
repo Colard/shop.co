@@ -12,7 +12,7 @@ export interface Product {
     returnPolicy: string;
     rating: number;
     availabilityStatus: string;
-    rewiews: Review[];
+    reviews: Review[];
     meta: Meta;
 }
 
