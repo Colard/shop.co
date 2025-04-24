@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import Slider from "react-slick";
+import ArrowIcon from "../assets/icons/ArrowIcon";
 
 type unbluredRangeType = (
   activeIndex: number,
@@ -34,7 +35,8 @@ const carouselSettings = {
   infinite: true,
   centerPadding: "100px",
   slidesToShow: 3,
-  speed: 500,
+  speed: 200,
+  touchThreshold: 100,
   arrows: false,
   initialSlide: 0,
   responsive: [
@@ -76,6 +78,7 @@ const CommentsCarousel: React.FC<CommentsCarouselProps> = ({
     limit: 8,
   });
   const isMounted = React.useRef(false);
+  const slider = React.useRef<Slider>(null);
 
   React.useEffect(() => {
     if (!isMounted.current) {
@@ -90,15 +93,39 @@ const CommentsCarousel: React.FC<CommentsCarouselProps> = ({
 
   const range = unbluredRange(activeIndex, 1, reviews.length);
 
+  let nextSlide = () => {
+    if (slider.current) {
+      slider.current.slickNext();
+    }
+  };
+
+  let prevSlide = () => {
+    if (slider.current) {
+      slider.current.slickPrev();
+    }
+  };
+
   return (
     <section className={`${className}`} {...rest}>
-      <Container>
-        <h2 className="font-integralcf text-primary mb-6 text-3xl md:mb-10">
+      <Container className="mb-6 flex justify-between sm:gap-20 md:mb-20">
+        <h2 className="font-integralcf text-primary text-3xl">
           OUR HAPPY CUSTOMERS
         </h2>
+
+        <div className="flex gap-4 self-end">
+          <ArrowIcon
+            className="cursor-pointer select-none hover:opacity-70"
+            onClick={prevSlide}
+          ></ArrowIcon>
+          <ArrowIcon
+            className="scale-x-[-1] cursor-pointer select-none hover:opacity-70"
+            onClick={nextSlide}
+          ></ArrowIcon>
+        </div>
       </Container>
 
       <Slider
+        ref={slider}
         {...carouselSettings}
         beforeChange={(_current, next) => {
           setActiveIndex(next);
@@ -111,7 +138,7 @@ const CommentsCarousel: React.FC<CommentsCarouselProps> = ({
               rating={item.rating}
               name={item.reviewerName}
               text={item.comment}
-              className={`aspect-aspect-[100/48] mx-auto h-full min-h-40 w-full p-6 transition-all duration-700 select-none ${
+              className={`aspect-aspect-[100/48] mx-auto h-full min-h-40 w-full p-6 transition-all duration-500 select-none ${
                 range.includes(index) ? "blur-none" : "blur-[2px]"
               } `}
             />
