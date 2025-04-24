@@ -1,10 +1,10 @@
 import React from "react";
 import Container from "../../components/Container";
 import useDarkMode from "../../hooks/useDarkMode";
-import { Link } from "react-router-dom";
 import BurgerMenu from "./BurgerMenu";
 import NavBar from "./NavBar";
 import Instruments from "./Instruments";
+import Logo from "../../components/Logo";
 
 const links = [
   {
@@ -50,19 +50,11 @@ const Header: React.FC<HeaderProps> = ({ className = "", ...rest }) => {
 
           <BurgerMenu isActive={isMenuOpened} onClick={toggleMenu} />
 
-          <Logo />
+          <Logo className="z-20 -mt-2" />
         </div>
         <Instruments darkModeToggler={darkModeToggler}></Instruments>
       </Container>
     </header>
-  );
-};
-
-let Logo: React.FC = () => {
-  return (
-    <Link to="/" className="font-integralcf text-logo z-20 -mt-2 select-none">
-      SHOP.CO
-    </Link>
   );
 };
 

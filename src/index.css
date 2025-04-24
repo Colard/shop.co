@@ -47,6 +47,9 @@
   /* dressing section */
   --spacing-dressing-img-height: clamp(12rem, 9.7714rem + 9.1429vw, 18rem);
 
+  /* footer */
+  --spacing-footer-letter-icon: clamp(1.25rem, 1.157rem + 0.381vw, 1.5rem);
+
   /*    RADIUS    */
   --radius-md: clamp(0.75rem, 0.5643rem + 0.7619vw, 1.25rem); /*20-12*/
   --radius-xl: clamp(1.25rem, 0.7857rem + 1.9048vw, 2.5rem); /*40-20*/
