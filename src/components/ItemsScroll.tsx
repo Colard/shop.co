@@ -53,11 +53,11 @@ function ItemsScroll<T>({
       onMouseLeave={onMouseLeave}
       onMouseUp={onMouseUp}
       onMouseMove={onMouseMove}
-      className={`no-scrollbar flex w-full cursor-grab gap-5 overflow-x-auto ${className}`}
+      className={`no-scrollbar flex w-full cursor-grab justify-between gap-5 overflow-x-auto ${className}`}
       {...rest}
     >
       {elements.map((item, index) => (
-        <div key={extractKey ? extractKey(item) : index}>
+        <div key={extractKey ? extractKey(item) : index} className="contents">
           {renderFunction(item)}
         </div>
       ))}

@@ -23,13 +23,13 @@ let ItemCard: React.FC<ItemCardProps> = ({
 }) => {
   return (
     <article
-      className={`${className} overflow-clip rounded-t-[1.25rem] transition-all duration-300 ease-in-out hover:scale-90`}
+      className={`${className} overflow-clip transition-all duration-300 ease-in-out hover:scale-90`}
       {...rest}
     >
       <a className="width-full block max-w-75 min-w-50 cursor-pointer transition-all duration-300">
         <img
           draggable={false}
-          className={`bg-secondary size-full max-h-75 min-h-50 max-w-75 min-w-50`}
+          className={`bg-secondary aspect-square size-full w-full rounded-[1.25rem]`}
           src={thumbnail}
           alt={title}
         ></img>

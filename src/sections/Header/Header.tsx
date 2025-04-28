@@ -9,7 +9,7 @@ import Logo from "../../components/Logo";
 const links = [
   {
     name: "Shop",
-    path: "/",
+    path: "/category",
   },
   {
     name: "On Sale",
@@ -42,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({ className = "", ...rest }) => {
       className={`h-header md:h-md-header bg-bg-color top-0 z-50 ${className}`}
       {...rest}
     >
-      <Container className="flex items-center justify-between">
+      <Container className="border-b-primary/10 flex items-center justify-between border-b">
         <div className="flex h-full items-center lg:gap-10">
           <nav className="h-full lg:order-1 lg:h-auto">
             <NavBar isOpen={isMenuOpened} links={links} />

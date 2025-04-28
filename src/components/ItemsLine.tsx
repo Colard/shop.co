@@ -22,7 +22,9 @@ let ItemsLine: React.FC<ItemsLineProps> = ({
       <ItemsScroll
         extractKey={(item) => item.id}
         elements={products}
-        renderFunction={(item) => <ItemCard key={item.id} {...item} />}
+        renderFunction={(item) => (
+          <ItemCard key={item.id} {...item} className="flex-1" />
+        )}
       ></ItemsScroll>
     </div>
   );
