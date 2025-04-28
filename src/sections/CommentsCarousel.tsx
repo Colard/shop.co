@@ -126,6 +126,7 @@ const CommentsCarousel: React.FC<CommentsCarouselProps> = ({
 
       <Slider
         ref={slider}
+        className="min-h-40"
         {...carouselSettings}
         beforeChange={(_current, next) => {
           setActiveIndex(next);

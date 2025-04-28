@@ -1,5 +1,7 @@
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import StarRating from "./StarRating";
+import altImage from "../assets/images/error-image-photo-icon.png";
+import { tw } from "../utils/tailwindFunctions";
 
 interface ItemCardProps
   extends Omit<React.ComponentPropsWithoutRef<"article">, "children" | "id"> {
@@ -21,18 +23,30 @@ let ItemCard: React.FC<ItemCardProps> = ({
   discountPercentage,
   ...rest
 }) => {
+  const errorImageClassName = tw`size-25 opacity-20`;
+
+  const imageErrorHandle = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+    const target = e.target as HTMLImageElement;
+    target.onerror = null;
+    target.src = altImage;
+    target.className = errorImageClassName;
+  };
+
   return (
     <article
       className={`${className} overflow-clip transition-all duration-300 ease-in-out hover:scale-90`}
       {...rest}
     >
       <a className="width-full block max-w-75 min-w-50 cursor-pointer transition-all duration-300">
-        <img
-          draggable={false}
-          className={`bg-secondary aspect-square size-full w-full rounded-[1.25rem]`}
-          src={thumbnail}
-          alt={title}
-        ></img>
+        <div className="bg-secondary flex aspect-square size-full items-center justify-center overflow-clip rounded-[1.25rem]">
+          <img
+            draggable={false}
+            className={"size-full"}
+            src={thumbnail}
+            alt={title}
+            onError={imageErrorHandle}
+          ></img>
+        </div>
         <h3 className="line-clamp-2 text-lg font-bold wrap-anywhere">
           {title}
         </h3>

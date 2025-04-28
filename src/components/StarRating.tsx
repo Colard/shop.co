@@ -5,6 +5,7 @@ interface StarRatingProps
   rating: number;
   starContainerClassName?: string;
   max?: number;
+  bgColor?: string;
 }
 
 const StarRating: React.FC<StarRatingProps> = ({
@@ -12,6 +13,7 @@ const StarRating: React.FC<StarRatingProps> = ({
   rating,
   starContainerClassName = "",
   max = 5,
+  bgColor = "var(--color-star-yellow)",
   ...rest
 }) => {
   const starClassName = tw`block aspect-square h-full mask-[url('src/assets/masks/star.svg')] mask-no-repeat`;
@@ -26,7 +28,8 @@ const StarRating: React.FC<StarRatingProps> = ({
             return (
               <span
                 key={i + "star"}
-                className={`${starClassName} bg-star-yellow`}
+                className={`${starClassName}`}
+                style={{ backgroundColor: bgColor }}
               />
             );
           }
@@ -38,7 +41,10 @@ const StarRating: React.FC<StarRatingProps> = ({
                   className="h-full w-full overflow-hidden"
                   style={{ width: `${(rating - i) * 100}%` }}
                 >
-                  <span className={`${starClassName} bg-star-yellow`} />
+                  <span
+                    className={`${starClassName}`}
+                    style={{ backgroundColor: bgColor }}
+                  />
                 </div>
               </div>
             );
