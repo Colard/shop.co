@@ -15,15 +15,7 @@ const productsApiProps: useProductsApiProps = {
 };
 
 let TopSelling: React.FC<TopSellingProps> = ({ className = "", ...rest }) => {
-  const { products, loadMore } = useProductsApi(productsApiProps);
-
-  const isMounted = React.useRef(false);
-  React.useEffect(() => {
-    if (!isMounted.current) {
-      loadMore();
-      isMounted.current = true;
-    }
-  }, []);
+  const { products } = useProductsApi(productsApiProps);
 
   return (
     <Container>

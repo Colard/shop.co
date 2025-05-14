@@ -73,19 +73,11 @@ const CommentsCarousel: React.FC<CommentsCarouselProps> = ({
 }) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [reviews, setReviews] = useState<Review[]>([]);
-  const { products, loadMore } = useProductsApi({
+  const { products } = useProductsApi({
     select: ["reviews"],
     limit: 8,
   });
-  const isMounted = React.useRef(false);
   const slider = React.useRef<Slider>(null);
-
-  React.useEffect(() => {
-    if (!isMounted.current) {
-      loadMore();
-      isMounted.current = true;
-    }
-  }, []);
 
   React.useEffect(() => {
     setReviews(products.map((item) => item.reviews[0]));

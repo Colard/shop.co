@@ -15,15 +15,7 @@ interface NewArrivalsProps
   extends Omit<React.ComponentPropsWithoutRef<"section">, "children"> {}
 
 let NewArrivals: React.FC<NewArrivalsProps> = ({ className = "", ...rest }) => {
-  const { products, loadMore } = useProductsApi(productsApiProps);
-
-  const isMounted = React.useRef(false);
-  React.useEffect(() => {
-    if (!isMounted.current) {
-      loadMore();
-      isMounted.current = true;
-    }
-  }, []);
+  const { products } = useProductsApi(productsApiProps);
 
   return (
     <Container className={`${className}`} {...rest}>
