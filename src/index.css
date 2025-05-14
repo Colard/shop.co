@@ -12,7 +12,7 @@
 
   --color-bg-color: #ffffff;
   --color-primary: #000000;
-  --color-secondary: #f0eeed;
+  --color-secondary: #f0f0f0;
   --color-star-yellow: #ffc633;
   --color-discount: #ff3333;
   --color-green: #01ab31;
@@ -50,6 +50,9 @@
 
   /* footer */
   --spacing-footer-letter-icon: clamp(1.25rem, 1.157rem + 0.381vw, 1.5rem);
+
+  /* pagination */
+  --spacing-pagination: clamp(2.25rem, 2.1571rem + 0.381vw, 2.5rem);
 
   /*    RADIUS    */
   --radius-md: clamp(0.75rem, 0.5643rem + 0.7619vw, 1.25rem); /*20-12*/
