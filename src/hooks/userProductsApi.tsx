@@ -4,76 +4,52 @@ import { Product } from "../types/api.types";
 export interface useProductsApiProps {
   limit?: number;
   skip?: number;
+  page?: number;
   sortBy?: keyof Product;
   order?: "asc" | "desc";
   select?: (keyof Product)[];
 }
 
-interface State {
-  products: Product[];
-  page: number;
-  loading: boolean;
-}
+const useProductsApi = (initialSettings: useProductsApiProps = {}) => {
+  const [products, setProducts] = React.useState<Product[]>([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const initial = React.useRef(initialSettings);
 
-type Action =
-  | { type: "LOAD_START" }
-  | { type: "LOAD_SUCCESS"; payload: Product[] }
-  | { type: "RESET" };
+  const [settings, setSettings] = React.useState<useProductsApiProps>({
+    limit: 12,
+    skip: 0,
+    page: 0,
+    ...initial.current,
+  });
 
-const initialState: State = {
-  products: [],
-  page: 0,
-  loading: false,
-};
+  const updateSettings = (newSettings: useProductsApiProps) => {
+    setSettings((prev) => ({ ...prev, ...newSettings }));
+  };
 
-function reducer(state: State, action: Action): State {
-  switch (action.type) {
-    case "LOAD_START":
-      return { ...state, loading: true };
-    case "LOAD_SUCCESS":
-      return {
-        ...state,
-        loading: false,
-        page: state.page + 1,
-        products: [...state.products, ...action.payload],
-      };
-    case "RESET":
-      return initialState;
-    default:
-      return state;
-  }
-}
+  React.useEffect(() => {
+    if (isLoading) return;
 
-const useProductsApi = ({
-  limit = 12,
-  skip = 0,
-  sortBy,
-  order,
-  select,
-}: useProductsApiProps) => {
-  const [state, dispatch] = React.useReducer(reducer, initialState);
+    const { limit = 12, skip = 0, page = 0, sortBy, order, select } = settings;
 
-  const loadMore = React.useCallback(() => {
-    if (state.loading) return;
-
-    let request = `https://dummyjson.com/products?limit=${limit}&skip=${skip + state.page * limit}`;
+    let request = `https://dummyjson.com/products?limit=${limit}&skip=${skip + page * limit}`;
     request += sortBy ? `&sortBy=${sortBy}` : "";
     request += order ? `&order=${order}` : "";
     request += select ? `&select=${select.join(",")}` : "";
 
-    dispatch({ type: "LOAD_START" });
+    setIsLoading(true);
 
     fetch(request)
       .then((res) => res.json())
       .then((data) => {
-        dispatch({ type: "LOAD_SUCCESS", payload: data.products });
+        setProducts(data.products);
+        setIsLoading(false);
       });
-  }, [limit, skip, sortBy, order, select, state.page, state.loading]);
+  }, [settings]);
 
   return {
-    products: state.products,
-    loadMore,
-    loading: state.loading,
+    products: products,
+    loading: isLoading,
+    updateSettings: updateSettings,
   };
 };
 
