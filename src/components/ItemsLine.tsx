@@ -22,14 +22,16 @@ let ItemsLine: React.FC<ItemsLineProps> = ({
       <ItemsScroll
         extractKey={(item) => item.id}
         elements={products}
-        renderFunction={(item) => <ItemCard {...item} className="flex-1" />}
+        renderFunction={(item) => (
+          <ItemCard {...item} className="min-w-50 flex-1" />
+        )}
       ></ItemsScroll>
     );
   } else {
     scrollContent = (
       <ItemsScroll
         elements={Array.from({ length: 4 })}
-        renderFunction={() => <LoadingCard className="flex-1" />}
+        renderFunction={() => <LoadingCard className="min-w-50 flex-1" />}
       ></ItemsScroll>
     );
   }

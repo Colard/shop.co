@@ -8,7 +8,7 @@ interface LoadingCardProps
 let LoadingCard: React.FC<LoadingCardProps> = ({ className = "", ...rest }) => {
   return (
     <div
-      className={`${className} w-full max-w-75 min-w-50 animate-pulse select-none`}
+      className={`${className} w-full max-w-75 animate-pulse select-none`}
       {...rest}
     >
       <div className="bg-secondary flex aspect-square w-full items-center justify-center rounded-[1.25rem]">

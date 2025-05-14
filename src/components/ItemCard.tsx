@@ -37,7 +37,7 @@ let ItemCard: React.FC<ItemCardProps> = ({
       className={`${className} overflow-clip transition-all duration-300 ease-in-out hover:scale-90`}
       {...rest}
     >
-      <a className="width-full block max-w-75 min-w-50 cursor-pointer transition-all duration-300">
+      <a className="width-full block max-w-75 cursor-pointer transition-all duration-300">
         <div className="bg-secondary flex aspect-square size-full items-center justify-center overflow-clip rounded-[1.25rem]">
           <img
             draggable={false}

@@ -9,7 +9,7 @@ import Logo from "../../components/Logo";
 const links = [
   {
     name: "Shop",
-    path: "/category",
+    path: "/page/1",
   },
   {
     name: "On Sale",
