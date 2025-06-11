@@ -1,15 +1,11 @@
 import { Link } from "react-router-dom";
 import LinkWayArrow from "../assets/icons/LinkWayArrow";
 import React from "react";
-
-interface TPagePathElemnt {
-  name: string;
-  path?: string;
-}
+import { TLinkWayPath } from "../types/componentsProps.types";
 
 interface LinkWayProps
   extends Omit<React.ComponentPropsWithoutRef<"div">, "children"> {
-  pagePath: (TPagePathElemnt | string)[];
+  pagePath: TLinkWayPath[];
 }
 
 let LinkWay: React.FC<LinkWayProps> = ({
@@ -27,7 +23,7 @@ let LinkWay: React.FC<LinkWayProps> = ({
 
   return (
     <div
-      className={`${className} text-primary/60 flex items-baseline gap-1.5`}
+      className={`${className} text-primary/60 flex flex-wrap items-baseline gap-1.5`}
       {...rest}
     >
       {fullPagePath.map((item, index) => (
@@ -41,7 +37,7 @@ let LinkWay: React.FC<LinkWayProps> = ({
 };
 
 interface LinkWayElementProps {
-  pagePath: TPagePathElemnt | string;
+  pagePath: TLinkWayPath;
 }
 
 let LinkWayElement: React.FC<LinkWayElementProps> = ({ pagePath }) => {

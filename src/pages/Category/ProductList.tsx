@@ -56,6 +56,7 @@ let ProductList: React.FC<ProductListProps> = ({
 
   useEffect(() => {
     const paramCategory = searchParams.get("category");
+
     if (!paramCategory) {
       setCategory("All Products");
       return;
@@ -67,7 +68,7 @@ let ProductList: React.FC<ProductListProps> = ({
     currentCategory
       ? setCategory(currentCategory.name)
       : setCategory("All Products");
-  }, [searchParams]);
+  }, [searchParams, categories]);
 
   useEffect(() => {
     const initialSortParam =

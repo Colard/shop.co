@@ -27,7 +27,7 @@ let Hero: React.FC<HeroProps> = ({ className = "", ...rest }) => {
           <Button className="bg-primary text-secondary inset-shadow-secondary mt-6 h-13 w-full md:mt-8 md:max-w-52.5">
             Shop Now
           </Button>
-          <div className="mt-6 flex flex-wrap justify-between gap-5 md:mt-8">
+          <div className="mt-6 flex flex-wrap justify-around gap-5 md:mt-8 md:justify-start">
             <div>
               <p className="text-primary text-2xl font-bold">200+</p>
               <p>International Brands</p>

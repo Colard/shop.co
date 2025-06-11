@@ -13,7 +13,7 @@ let CategoryOverlay: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
-  // reset page number on category change
+  // reset page number on change search params
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;

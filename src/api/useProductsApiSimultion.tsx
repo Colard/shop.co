@@ -9,7 +9,17 @@ import {
   sortProducts,
 } from "../utils/productsHeleprs";
 
-/* simulation of api with search params filtering*/
+/*
+
+Simulation of API with search params filtering
+
+Original api: https://dummyjson.com/products
+
+The original API doesn't provide enough filtering functionality.         
+This API simulates asynchronous behavior with an artificial delay.
+
+*/
+
 const useProductsApiSimulation = (initFilters: FilterParams) => {
   const data = useData();
 
@@ -71,6 +81,8 @@ const useProductsApiSimulation = (initFilters: FilterParams) => {
 
         const minPrice = Math.min(...discountedPrices);
         const maxPrice = Math.max(...discountedPrices);
+
+        if (cancelled) return;
 
         setResponse({
           products: cleaned,

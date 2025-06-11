@@ -179,7 +179,7 @@ let CategoryButton: React.FC<CategoryButtonProps> = ({
   isActive,
   onClick,
 }) => {
-  const buttonClassName = tw`hover:text-bg-color hover:bg-primary active:text-bg-color active:bg-primary cursor-pointer rounded-full px-5 py-2 transition-colors duration-300`;
+  const buttonClassName = tw`hover:text-bg-color hover:bg-primary active:text-bg-color active:bg-primary cursor-pointer rounded-full px-5 py-2 transition-colors duration-200 select-none`;
   const activeButtonClassName = tw`text-bg-color ${isActive ? "bg-primary" : "bg-secondary"}`;
 
   const className = isActive
