@@ -4,6 +4,8 @@ import Home from "./pages/Home.tsx";
 import { DataSimulationProvider } from "./contexts/DataSimulationContext.tsx";
 import RoutingScrollToTop from "./utils/RoutingScrollToTop.tsx";
 import CategoryOverlay from "./pages/Category/CategoryOverlay.tsx";
+import ItemPage from "./pages/ItemPage.tsx";
+import NotFound from "./pages/NotFound.tsx";
 
 function App() {
   return (
@@ -15,6 +17,10 @@ function App() {
             <Route index element={<Home />} />
 
             <Route path="page/:page" element={<CategoryOverlay />} />
+
+            <Route path="item/:id" element={<ItemPage />}></Route>
+
+            <Route path="*" element={<NotFound />}></Route>
           </Route>
         </Routes>
       </DataSimulationProvider>
