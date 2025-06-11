@@ -1,8 +1,8 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
-import ArrowIcon from "../../assets/icons/ArrowIcon";
-import { tw } from "../../utils/tailwindFunctions";
-import useTailwindBreakpoint from "../../hooks/useTailwindBreakpoint";
+import ArrowIcon from "../assets/icons/ArrowIcon";
+import { tw } from "../utils/tailwindFunctions";
+import useTailwindBreakpoint from "../hooks/useTailwindBreakpoint";
 
 type TPaginationFunction = (selectedItem: { selected: number }) => void;
 interface PaginationProps {

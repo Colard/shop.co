@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { tw } from "../utils/tailwindFunctions";
 import CloseIcon from "../assets/icons/CloseIcon";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import useCategoriesApi from "../api/useCategoriesApi";
 import DualIntegerRangeSlider from "../components/DualIntegerRangeSlider/DualIntegerRangeSlider";
 import useFilteredData from "../contexts/FilteredDataContext";
@@ -20,6 +20,7 @@ let Filters: React.FC<FiltersProps> = ({
   const [searchParams, setSearchParams] = useSearchParams();
   const categories = useCategoriesApi();
   const { response, filters } = useFilteredData();
+  const navigator = useNavigate();
 
   const minPrice = response?.minPrice || 0;
   const maxPrice = response?.maxPrice || 0;
@@ -83,8 +84,7 @@ let Filters: React.FC<FiltersProps> = ({
   );
 
   const clearFilters = () => {
-    const newParams = new URLSearchParams();
-    setSearchParams(newParams);
+    navigator("/page/1");
   };
 
   const settingBlockClassName = tw`border-primary/10 border-b`;
@@ -96,7 +96,7 @@ let Filters: React.FC<FiltersProps> = ({
       {...rest}
     >
       <div className={`${settingBlockClassName} ${headerRowClassName}`}>
-        <h2 className={headerNameClassName}>Filters</h2>{" "}
+        <h2 className={headerNameClassName}>Filters</h2>
         <CloseIcon
           className="text-primary/40 size-4 cursor-pointer sm:hidden"
           onClick={closing}

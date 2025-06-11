@@ -4,7 +4,7 @@ import Container from "../../components/Container";
 
 import { useCallback, useState } from "react";
 import FiltersOverlay from "./FiltersOverlay";
-import Pagination from "./Pagination";
+import Pagination from "../../components/Pagination";
 import useFilteredData from "../../contexts/FilteredDataContext";
 import { PRODUCT_PAGE_SIZE } from "../../constants";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -24,11 +24,11 @@ let Category: React.FC<CategoryProps> = ({ currentPage }) => {
   }, []);
   const { response } = useFilteredData();
 
-  const handlePageChange = (selectedItem: { selected: number }) => {
+  const handlePageChange = useCallback((selectedItem: { selected: number }) => {
     if (selectedItem.selected !== currentPage - 1) {
       navigate(`/page/${selectedItem.selected + 1}${location.search}`);
     }
-  };
+  }, []);
 
   return (
     <Container className="pt-5 pb-12 md:pt-6 md:pb-20">
