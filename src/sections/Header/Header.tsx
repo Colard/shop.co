@@ -5,25 +5,7 @@ import BurgerMenu from "./BurgerMenu";
 import NavBar from "./NavBar";
 import Instruments from "./Instruments";
 import Logo from "../../components/Logo";
-
-const links = [
-  {
-    name: "Shop",
-    path: "/page/1",
-  },
-  {
-    name: "On Sale",
-    path: "/",
-  },
-  {
-    name: "New Arrivals",
-    path: "/",
-  },
-  {
-    name: "Collections",
-    path: "/",
-  },
-];
+import { headerLinks } from "../../constants";
 
 interface HeaderProps
   extends Omit<React.ComponentPropsWithoutRef<"header">, "children"> {}
@@ -45,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({ className = "", ...rest }) => {
       <Container className="border-b-primary/10 flex items-center justify-between border-b">
         <div className="flex h-full items-center lg:gap-10">
           <nav className="h-full lg:order-1 lg:h-auto">
-            <NavBar isOpen={isMenuOpened} links={links} />
+            <NavBar isOpen={isMenuOpened} links={headerLinks} />
           </nav>
 
           <BurgerMenu isActive={isMenuOpened} onClick={toggleMenu} />
