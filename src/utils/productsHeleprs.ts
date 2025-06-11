@@ -1,5 +1,7 @@
 import { FilterParams, Product, TOrder } from "../types/api.types";
 
+/*     SERVER SIMULAION FUNCTIONS        */
+
 export const filteringFunction = (product: Product, filters: FilterParams) => {
   const hasDiscount = product.discountPercentage > 10;
   const realPrice = hasDiscount
@@ -89,6 +91,18 @@ export function pickProperties<T extends object, K extends keyof T>(
   });
 
   return result;
+}
+
+/*   DISCOUNT FILTERING    */
+// !!! ADDED FOR TESTING WITH API !!!
+export function filterProductsDiscount(products: Product[]): Product[] {
+  return products.map((el) => {
+    return {
+      ...el,
+      discountPercentage:
+        el.discountPercentage < 10 ? 0 : Math.round(el.discountPercentage),
+    };
+  });
 }
 
 /*    SORTING    */

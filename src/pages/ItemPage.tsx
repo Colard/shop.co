@@ -1,5 +1,7 @@
-let ItemPage: React.FC = ({ ...rest }) => {
-  return <div {...rest}></div>;
+import Container from "../components/Container";
+
+let ItemPage: React.FC = () => {
+  return <Container></Container>;
 };
 
 export default ItemPage;

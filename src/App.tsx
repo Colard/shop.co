@@ -18,7 +18,7 @@ function App() {
 
             <Route path="page/:page" element={<CategoryOverlay />} />
 
-            <Route path="item/:id" element={<ItemPage />}></Route>
+            <Route path="product/:id" element={<ItemPage />}></Route>
 
             <Route path="*" element={<NotFound />}></Route>
           </Route>

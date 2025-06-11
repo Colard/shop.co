@@ -7,6 +7,7 @@ import React, {
 } from "react";
 
 import { Product } from "../types/api.types";
+import { filterProductsDiscount } from "../utils/productsHeleprs";
 
 const DataContext = createContext<Product[]>([]);
 
@@ -23,7 +24,7 @@ export const DataSimulationProvider: React.FC<DataSimulationContextProps> = ({
   useEffect(() => {
     fetch("https://dummyjson.com/products?limit=0")
       .then((res) => res.json())
-      .then((data) => setData(data.products))
+      .then((data) => setData(filterProductsDiscount(data.products)))
       .catch((err) => {
         console.error("Fetch error:", err);
         setData([]);

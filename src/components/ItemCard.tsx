@@ -2,6 +2,7 @@ import React, { SyntheticEvent } from "react";
 import StarRating from "./StarRating";
 import altImage from "../assets/images/error-image-photo-icon.png";
 import { tw } from "../utils/tailwindFunctions";
+import { Link } from "react-router-dom";
 
 interface ItemCardProps
   extends Omit<React.ComponentPropsWithoutRef<"article">, "children" | "id"> {
@@ -37,7 +38,10 @@ let ItemCard: React.FC<ItemCardProps> = ({
       className={`${className} overflow-clip transition-all duration-300 ease-in-out hover:scale-90 active:scale-90`}
       {...rest}
     >
-      <a className="width-full block max-w-75 cursor-pointer transition-all duration-300">
+      <Link
+        to={`/product/${id}`}
+        className="width-full block max-w-75 cursor-pointer transition-all duration-300"
+      >
         <div className="bg-secondary flex aspect-square size-full items-center justify-center overflow-clip rounded-[1.25rem]">
           <img
             draggable={false}
@@ -61,7 +65,7 @@ let ItemCard: React.FC<ItemCardProps> = ({
           </p>
         </div>
         <Price price={price} discount={discountPercentage} />
-      </a>
+      </Link>
     </article>
   );
 };
@@ -72,11 +76,8 @@ interface PriceProps {
 }
 
 let Price: React.FC<PriceProps> = ({ discount, price }) => {
-  let priceLabel;
-  discount = Math.floor(+discount);
-
-  // !!! ADDED FOR TESTING WITH API !!!
-  if (discount >= 10) {
+  let priceLabel: React.ReactNode = null;
+  if (discount > 0) {
     const priceWithDiscount = (price * ((100 - discount) / 100)).toFixed(2);
     priceLabel = (
       <>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import useProductsApi from "../api/userProductsApi";
 import { Review } from "../types/api.types";
 import CommentBlock from "../components/CommentBlock";
 import Container from "../components/Container";
@@ -8,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 import Slider from "react-slick";
 import ArrowIcon from "../assets/icons/ArrowIcon";
+import useProductsApiSimulation from "../api/useProductsApiSimultion";
 
 type unbluredRangeType = (
   activeIndex: number,
@@ -73,15 +73,17 @@ const CommentsCarousel: React.FC<CommentsCarouselProps> = ({
 }) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [reviews, setReviews] = useState<Review[]>([]);
-  const { products } = useProductsApi({
+  const { response } = useProductsApiSimulation({
     select: ["reviews"],
     limit: 8,
   });
+  const products = response?.products || [];
+
   const slider = React.useRef<Slider>(null);
 
   React.useEffect(() => {
     setReviews(products.map((item) => item.reviews[0]));
-  }, [products]);
+  }, [response]);
 
   const range = unbluredRange(activeIndex, 1, reviews.length);
 
