@@ -42,7 +42,10 @@ let PromoBar: React.FC<PromoBarProps> = ({ className = "", ...rest }) => {
             Sign Up Now
           </a>
         </p>
-        <div className="relative hidden size-5 sm:block" onClick={dismiss}>
+        <div
+          className="relative hidden size-5 cursor-pointer sm:block"
+          onClick={dismiss}
+        >
           <span className="bg-bg-color absolute inset-0 m-auto block h-0.5 w-[90%] rotate-45 transform"></span>
           <span className="bg-bg-color absolute inset-0 m-auto block h-0.5 w-[90%] -rotate-45 transform"></span>
         </div>

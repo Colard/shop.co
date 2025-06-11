@@ -32,11 +32,11 @@ let Category: React.FC<CategoryProps> = ({ currentPage }) => {
 
   return (
     <Container className="pt-5 pb-12 md:pt-6 md:pb-20">
-      <LinkWay pageName="Shop" className="mb-3 md:mb-6" />
+      <LinkWay pagePath={["Shop"]} className="mb-3 md:mb-6" />
       <div className="flex">
         <FiltersOverlay isOpen={areFiltersOpen} onClose={toggleFilters} />
 
-        <div className="flex w-full flex-col">
+        <div className="ml-0 flex w-full flex-col sm:ml-5">
           <ProductList
             itemsStartNumber={(currentPage - 1) * PRODUCT_PAGE_SIZE + 1}
             currentPage={currentPage}

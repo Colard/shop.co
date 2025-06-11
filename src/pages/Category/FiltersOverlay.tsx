@@ -12,7 +12,7 @@ let FiltersOverlay: React.FC<FiltersOverlayProps> = ({ isOpen, onClose }) => {
   const headerHeight = useHeaderHeight();
   const isLargeScreen = useTailwindBreakpoint("sm");
 
-  const filterClassName = tw`bg-bg-color fixed inset-0 z-60 h-full w-full transition-transform duration-300 sm:static sm:z-0 sm:w-50 sm:translate-y-0 md:h-auto lg:w-75`;
+  const filterClassName = tw`bg-bg-color border-primary/10 fixed inset-0 z-60 h-full w-full rounded-[20px] border-1 transition-transform duration-300 sm:static sm:z-0 sm:h-min sm:w-50 sm:translate-y-0 lg:w-75`;
   const filterContainerClassName = tw`bg-primary/20 fixed inset-0 z-60 transition-opacity duration-300 sm:z-0 sm:contents`;
   const inOpenOnSmallScreen = isOpen && !isLargeScreen;
 
