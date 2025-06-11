@@ -36,6 +36,7 @@ const useTailwindBreakpoint = (breakpointVar: string) => {
       setIsBreakpoint(isBreakpointMatch("--breakpoint-" + breakpointVar));
     };
 
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => {

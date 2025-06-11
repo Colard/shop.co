@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout.tsx";
 import Home from "./pages/Home.tsx";
-import Category from "./pages/Category/Category.tsx";
 import { DataSimulationProvider } from "./contexts/DataSimulationContext.tsx";
 import RoutingScrollToTop from "./utils/RoutingScrollToTop.tsx";
+import CategoryOverlay from "./pages/Category/CategoryOverlay.tsx";
 
 function App() {
   return (
@@ -13,7 +13,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="page/:page" element={<Category />}></Route>
+
+            <Route path="page/:page" element={<CategoryOverlay />} />
           </Route>
         </Routes>
       </DataSimulationProvider>

@@ -26,7 +26,7 @@ function DropdownList<T extends number | string>({
 }: DropdownListProps<T>) {
   const alignRight = useDropdownAlignment(wrapperRef, optionWidth);
 
-  const selectOptionClassName = tw`hover:bg-primary/10 flex h-10 shrink-0 cursor-pointer items-center truncate px-2 hover:font-bold`;
+  const selectOptionClassName = tw`hover:bg-primary/10 active:bg-primary/10 flex h-10 shrink-0 cursor-pointer items-center truncate px-2 hover:font-bold active:font-bold`;
 
   const listClassName = tw`bg-bg-color absolute top-full z-20 flex flex-col overflow-y-auto shadow-2xl transition-all duration-300 ease-out`;
   const openListClassName = isOpen

@@ -34,7 +34,7 @@ let ItemCard: React.FC<ItemCardProps> = ({
 
   return (
     <article
-      className={`${className} overflow-clip transition-all duration-300 ease-in-out hover:scale-90`}
+      className={`${className} overflow-clip transition-all duration-300 ease-in-out hover:scale-90 active:scale-90`}
       {...rest}
     >
       <a className="width-full block max-w-75 cursor-pointer transition-all duration-300">

@@ -15,7 +15,7 @@ let LinkWay: React.FC<LinkWayProps> = ({
   return (
     <div className={`${className} flex gap-1.5`} {...rest}>
       <Link
-        className="hover:text-primary text-primary/60 transition-color flex items-baseline gap-1 duration-300"
+        className="hover:text-primary active:text-primary text-primary/60 transition-color flex items-baseline gap-1 duration-300"
         to="/"
       >
         Home

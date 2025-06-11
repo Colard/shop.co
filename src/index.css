@@ -89,6 +89,8 @@
     font-size: var(--text-base);
 
     scroll-behavior: smooth;
+
+    overflow-x: hidden;
   }
 
   *::-webkit-scrollbar {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useProductsApi from "../hooks/userProductsApi";
+import useProductsApi from "../api/userProductsApi";
 import { Review } from "../types/api.types";
 import CommentBlock from "../components/CommentBlock";
 import Container from "../components/Container";
@@ -106,11 +106,11 @@ const CommentsCarousel: React.FC<CommentsCarouselProps> = ({
 
         <div className="flex gap-4 self-end">
           <ArrowIcon
-            className="cursor-pointer select-none hover:opacity-70"
+            className="cursor-pointer select-none hover:opacity-70 active:opacity-70"
             onClick={prevSlide}
           ></ArrowIcon>
           <ArrowIcon
-            className="scale-x-[-1] cursor-pointer select-none hover:opacity-70"
+            className="scale-x-[-1] cursor-pointer select-none hover:opacity-70 active:opacity-70"
             onClick={nextSlide}
           ></ArrowIcon>
         </div>

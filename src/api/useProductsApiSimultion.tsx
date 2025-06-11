@@ -1,46 +1,38 @@
 import { useCallback, useEffect, useState } from "react";
-import { FilterParams, Product } from "../types/api.types";
+import { FilterParams, ProductResponse } from "../types/api.types";
 import useData from "../contexts/DataSimulationContext";
 import {
   filteringFunction,
+  filterProductsByCategory,
   pickProperties,
   sliceProducts,
   sortProducts,
 } from "../utils/productsHeleprs";
 
-type ProductResponse = {
-  products: Product[] | null;
-  total: number;
-  skip: number;
-  limit: number;
-};
-
-const useProductsApiSimultion = (initFilters: FilterParams) => {
+/* simulation of api with search params filtering*/
+const useProductsApiSimulation = (initFilters: FilterParams) => {
   const data = useData();
-  const [filters, setFilters] = useState<FilterParams>({
+
+  const [filters, setFilters] = useState<FilterParams>(() => ({
     limit: 12,
     skip: 0,
     ...initFilters,
-  });
+  }));
 
   const [response, setResponse] = useState<ProductResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
   const changeFilters = useCallback((newFilters: FilterParams) => {
-    setFilters(newFilters);
+    setFilters((prev) => ({
+      ...prev,
+      ...newFilters,
+    }));
   }, []);
 
   useEffect(() => {
-    setFilters({
-      limit: 12,
-      skip: 0,
-      ...initFilters,
-    });
-  }, [initFilters]);
-
-  useEffect(() => {
     let cancelled = false;
+
     const fetch = async () => {
       if (!Array.isArray(data)) return;
 
@@ -49,21 +41,44 @@ const useProductsApiSimultion = (initFilters: FilterParams) => {
 
       try {
         await new Promise((res) => setTimeout(res, 500));
-
         if (cancelled) return;
 
-        const filtered = data.filter((p) => filteringFunction(p, filters));
-        const sorted = sortProducts(filtered, filters.sortBy, filters.order);
+        const filteredByCategory = filterProductsByCategory(
+          data,
+          filters.category,
+        );
+
+        const filteredFull = filteredByCategory.filter((p) =>
+          filteringFunction(p, filters),
+        );
+
+        const sorted = sortProducts(
+          filteredFull,
+          filters.sortBy,
+          filters.order,
+        );
+
         const sliced = sliceProducts(sorted, filters.limit, filters.skip);
         const cleaned = filters.select
           ? sliced.map((p) => pickProperties(p, filters.select))
           : sliced;
 
+        const discountedPrices = filteredByCategory.map((p) =>
+          p.discountPercentage >= 10
+            ? p.price * (1 - p.discountPercentage / 100)
+            : p.price,
+        );
+
+        const minPrice = Math.min(...discountedPrices);
+        const maxPrice = Math.max(...discountedPrices);
+
         setResponse({
           products: cleaned,
-          total: filtered.length,
+          total: filteredFull.length,
           limit: filters.limit || 0,
           skip: filters.skip || 0,
+          maxPrice: isFinite(maxPrice) ? maxPrice : 0,
+          minPrice: isFinite(minPrice) ? minPrice : 0,
         });
       } catch (e) {
         if (!cancelled) {
@@ -89,4 +104,4 @@ const useProductsApiSimultion = (initFilters: FilterParams) => {
   };
 };
 
-export default useProductsApiSimultion;
+export default useProductsApiSimulation;

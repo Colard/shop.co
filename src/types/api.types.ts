@@ -1,3 +1,12 @@
+export type ProductResponse = {
+  products: Product[] | null;
+  total: number;
+  skip: number;
+  limit: number;
+  maxPrice: number;
+  minPrice: number;
+};
+
 export interface Product {
   id: number;
   title: string;
@@ -42,4 +51,10 @@ export interface FilterParams {
   order?: TOrder;
   limit?: number;
   skip?: number;
+}
+
+export interface ProductCategory {
+  slug: string;
+  name: string;
+  url: string;
 }

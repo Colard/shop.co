@@ -1,25 +1,26 @@
 import { useEffect, useMemo } from "react";
 import Filters from "../../sections/Filters";
 import { tw } from "../../utils/tailwindFunctions";
+import useHeaderHeight from "../../hooks/useHeaderHeight";
+import useTailwindBreakpoint from "../../hooks/useTailwindBreakpoint";
 
 interface FiltersOverlayProps {
   isOpen: boolean;
-  isLargeScreen: boolean;
-  headerHeight: number;
   onClose: () => void;
 }
-let FiltersOverlay: React.FC<FiltersOverlayProps> = ({
-  isOpen,
-  isLargeScreen,
-  headerHeight,
-  onClose,
-}) => {
+let FiltersOverlay: React.FC<FiltersOverlayProps> = ({ isOpen, onClose }) => {
+  const headerHeight = useHeaderHeight();
+  const isLargeScreen = useTailwindBreakpoint("sm");
+
   const filterClassName = tw`bg-bg-color fixed inset-0 z-60 h-full w-full transition-transform duration-300 sm:static sm:z-0 sm:w-50 sm:translate-y-0 md:h-auto lg:w-75`;
   const filterContainerClassName = tw`bg-primary/20 fixed inset-0 z-60 transition-opacity duration-300 sm:z-0 sm:contents`;
   const inOpenOnSmallScreen = isOpen && !isLargeScreen;
 
   const styles = useMemo(
-    () => (isLargeScreen ? {} : { top: headerHeight }),
+    () =>
+      isLargeScreen
+        ? {}
+        : { top: headerHeight, height: `calc(100vh - ${headerHeight}px)` },
     [isLargeScreen, headerHeight],
   );
 
@@ -31,11 +32,7 @@ let FiltersOverlay: React.FC<FiltersOverlayProps> = ({
 
   return (
     <div
-      className={`${filterContainerClassName} ${
-        inOpenOnSmallScreen
-          ? "pointer-events-auto opacity-100"
-          : "pointer-events-none opacity-0"
-      }`}
+      className={`${filterContainerClassName} ${inOpenOnSmallScreen ? "opacity-100" : "opacity-0"} ${isOpen || isLargeScreen ? "pointer-events-auto" : "pointer-events-none"} `}
     >
       <Filters
         className={`${filterClassName} ${isOpen && !isLargeScreen ? "translate-y-0" : "translate-y-full"}`}

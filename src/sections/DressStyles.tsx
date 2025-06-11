@@ -63,7 +63,7 @@ let DressCard: React.FC<DressCardProps> = ({
 
   return (
     <div
-      className={`${className} ${roundignClass} bg-bg-color h-dressing-img-height relative flex transform cursor-pointer justify-end overflow-clip transition-all duration-300 select-none hover:z-2 hover:scale-110`}
+      className={`${className} ${roundignClass} bg-bg-color h-dressing-img-height relative flex transform cursor-pointer justify-end overflow-clip transition-all duration-300 select-none hover:z-2 hover:scale-110 active:z-2 active:scale-110`}
       onClick={onClick}
     >
       <img

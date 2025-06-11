@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "../components/Container";
 import ItemsLine from "../components/ItemsLine";
-import useProductsApi, { useProductsApiProps } from "../hooks/userProductsApi";
+import useProductsApi, { useProductsApiProps } from "../api/userProductsApi";
 import Button from "../components/Button";
 
 interface TopSellingProps

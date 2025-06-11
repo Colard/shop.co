@@ -24,7 +24,7 @@ const MediaIconPattern: React.FC<AccountIconPatternProps> = ({
         cx="14"
         cy="14"
         r="14"
-        className="fill-[var(--color-bg-color)] group-hover/icon:fill-[var(--color-primary)]"
+        className="fill-[var(--color-bg-color)] group-hover/icon:fill-[var(--color-primary)] group-active/icon:fill-[var(--color-primary)]"
       />
       <circle
         cx="14"
@@ -35,14 +35,14 @@ const MediaIconPattern: React.FC<AccountIconPatternProps> = ({
       {typeof iconPathData === "string" ? (
         <path
           d={iconPathData}
-          className={`fill-[var(--color-primary)] group-hover/icon:fill-[var(--color-bg-color)]`}
+          className={`fill-[var(--color-primary)] group-hover/icon:fill-[var(--color-bg-color)] group-active/icon:fill-[var(--color-bg-color)]`}
         />
       ) : (
         iconPathData.map((pathData, index) => (
           <path
             key={index}
             d={pathData}
-            className={`fill-[var(--color-primary)] group-hover/icon:fill-[var(--color-bg-color)]`}
+            className={`fill-[var(--color-primary)] group-hover/icon:fill-[var(--color-bg-color)] group-active/icon:fill-[var(--color-bg-color)]`}
           />
         ))
       )}

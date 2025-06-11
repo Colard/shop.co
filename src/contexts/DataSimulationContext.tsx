@@ -14,6 +14,7 @@ interface DataSimulationContextProps {
   children: ReactNode;
 }
 
+/* simulation of api data*/
 export const DataSimulationProvider: React.FC<DataSimulationContextProps> = ({
   children,
 }) => {

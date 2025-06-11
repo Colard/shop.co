@@ -1,11 +1,13 @@
-import React from "react";
-import LoadingCard from "../components/LoadingCard";
-import FiltersIcon from "../assets/icons/FiltersIcon";
-import { Product } from "../types/api.types";
-import ItemCard from "../components/ItemCard";
-import TextSelect from "../components/TextSelect/TextSelect";
-import { TSortCategories } from "../utils/productsHeleprs";
+import React, { useEffect } from "react";
+import LoadingCard from "../../components/LoadingCard";
+import FiltersIcon from "../../assets/icons/FiltersIcon";
+import { Product } from "../../types/api.types";
+import ItemCard from "../../components/ItemCard";
+import TextSelect from "../../components/TextSelect/TextSelect";
+import { TSortCategories } from "../../utils/productsHeleprs";
 import { useSearchParams } from "react-router-dom";
+import useCategoriesApi from "../../api/useCategoriesApi";
+import useFilteredData from "../../contexts/FilteredDataContext";
 
 type TSortingElements = [TSortCategories, string][];
 const SORT_CATEGORIES: TSortingElements = [
@@ -19,34 +21,61 @@ const SORT_CATEGORIES: TSortingElements = [
 
 interface ProductListProps
   extends Omit<React.ComponentPropsWithoutRef<"div">, "children"> {
-  category?: string;
   currentPage: number;
-  maxItemsCount: number;
   itemsOnPage: number;
   itemsStartNumber: number;
-  products: Product[] | null;
   openFilters: () => void;
-  loading: boolean;
-  onSortItemSelect: (value: string) => void;
 }
 
 let ProductList: React.FC<ProductListProps> = ({
   className = "",
-  products,
-  category = "All Products",
   currentPage,
-  maxItemsCount,
   itemsStartNumber,
   itemsOnPage,
   openFilters,
-  onSortItemSelect,
-  loading,
   ...rest
 }) => {
-  const [searchParams] = useSearchParams();
-  const value = searchParams.get("sort") as TSortCategories;
-  const initialParam =
-    SORT_CATEGORIES.find(([v]) => v === value) || SORT_CATEGORIES[0];
+  const categories = useCategoriesApi();
+  const [category, setCategory] = React.useState("All Products");
+  const [initialSortParam, setInitialSortParam] = React.useState<
+    TSortingElements[0]
+  >(SORT_CATEGORIES[0]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { response, loading } = useFilteredData();
+
+  const products = response?.products || null;
+  const total = response?.total || 0;
+
+  const onSortItemSelect = (value: string) => {
+    if (value == "popular" && !searchParams.get("sort")) return;
+
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("sort", value);
+    setSearchParams(newParams);
+  };
+
+  useEffect(() => {
+    const paramCategory = searchParams.get("category");
+    if (!paramCategory) {
+      setCategory("All Products");
+      return;
+    }
+    if (category === paramCategory) return;
+
+    const currentCategory = categories?.find((c) => c.slug === paramCategory);
+
+    currentCategory
+      ? setCategory(currentCategory.name)
+      : setCategory("All Products");
+  }, [searchParams]);
+
+  useEffect(() => {
+    const initialSortParam =
+      SORT_CATEGORIES.find(([v]) => {
+        return v === searchParams.get("sort");
+      }) || SORT_CATEGORIES[0];
+    setInitialSortParam(initialSortParam);
+  }, [searchParams]);
 
   return (
     <section className={`${className}`} {...rest}>
@@ -57,15 +86,14 @@ let ProductList: React.FC<ProductListProps> = ({
           {products && products.length > 0 && (
             <p className="text-primary/60 ml-2 lg:mr-3 lg:ml-0">
               Showing {itemsStartNumber}-
-              {itemsStartNumber + products.length - 1} of {maxItemsCount}{" "}
-              Products
+              {itemsStartNumber + products.length - 1} of {total} Products
             </p>
           )}
           <div className="inline w-full lg:w-auto">
             Sort by:{" "}
             <TextSelect
               className=""
-              initialValue={initialParam}
+              initialValue={initialSortParam}
               onItemSelect={onSortItemSelect}
               elements={SORT_CATEGORIES}
             />
@@ -73,9 +101,9 @@ let ProductList: React.FC<ProductListProps> = ({
         </div>
         <div
           onClick={openFilters}
-          className="bg-secondary hover:bg-primary transition-color group hover:before:bg-primary absolute top-1/2 right-2 size-8 -translate-y-1/2 cursor-pointer rounded-full p-2 duration-300 sm:hidden"
+          className="bg-secondary hover:bg-primary active:bg-primary transition-color group hover:before:bg-primary active:before:bg-primary absolute top-1/2 right-2 size-8 -translate-y-1/2 cursor-pointer rounded-full p-2 duration-300 sm:hidden"
         >
-          <FiltersIcon className="group-hover:text-secondary transition-color size-4 duration-300" />
+          <FiltersIcon className="group-hover:text-secondary group-active:text-secondary transition-color size-4 duration-300" />
         </div>
       </article>
 

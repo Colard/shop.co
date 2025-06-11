@@ -1,12 +1,25 @@
 import { FilterParams, Product, TOrder } from "../types/api.types";
 
 export const filteringFunction = (product: Product, filters: FilterParams) => {
+  const hasDiscount = product.discountPercentage > 10;
+  const realPrice = hasDiscount
+    ? product.price * (1 - product.discountPercentage / 100)
+    : product.price;
+
   return (
-    (!filters.category || product.category === filters.category) &&
-    (!filters.minPrice || product.price >= filters.minPrice) &&
-    (!filters.maxPrice || product.price <= filters.maxPrice) &&
+    (!filters.minPrice || realPrice >= filters.minPrice) &&
+    (!filters.maxPrice || realPrice <= filters.maxPrice) &&
     (!filters.minRating || product.rating >= filters.minRating) &&
     (!filters.maxRating || product.rating <= filters.maxRating)
+  );
+};
+
+export const filterProductsByCategory = (
+  products: Product[],
+  category?: string,
+) => {
+  return products.filter(
+    (product) => !category || product.category === category,
   );
 };
 
@@ -19,8 +32,11 @@ export const sortProducts = (
     return [...products];
 
   if (sortBy === "price") {
+    /*remove discount <= 10 %*/
     const calcRealPrice = (p: Product) =>
-      p.price * (1 - p.discountPercentage / 100);
+      p.discountPercentage >= 10
+        ? p.price * (1 - p.discountPercentage / 100)
+        : p.price;
 
     return [...products].sort((a, b) =>
       order === "asc"

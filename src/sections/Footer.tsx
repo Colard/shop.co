@@ -138,7 +138,7 @@ let FooterLink: React.FC<FooterLinkProps> = ({
   return (
     <Link
       to={to}
-      className="text-primary/60 hover:text-primary transition-all duration-300"
+      className="text-primary/60 hover:text-primary active:text-primary transition-all duration-300"
       {...rest}
     >
       {children}

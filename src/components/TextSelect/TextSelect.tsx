@@ -31,6 +31,8 @@ function TextSelect<T extends number | string>({
 
   const wrapperRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => setSelected(initialValue || elements[0]), [initialValue]);
+
   const toggleSelectVisibility = () => {
     if (!isVisible) setIsVisible(true);
     setIsOpen((prev) => !prev);
