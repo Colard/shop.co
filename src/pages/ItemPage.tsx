@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import useSingleProductApiSimulation from "../api/useSingleProductApiSimulation";
 import { TLinkWayPath } from "../types/componentsProps.types";
 import useCategoriesApi from "../api/useCategoriesApi";
+import TabMenu from "../components/TabMenu";
 
 const initialLinkPath = [
   {
@@ -53,6 +54,7 @@ let ItemPage: React.FC = () => {
   return (
     <Container>
       <LinkWay pagePath={itemLinksPaths}></LinkWay>
+      <TabMenu></TabMenu>
     </Container>
   );
 };

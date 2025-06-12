@@ -1,4 +1,4 @@
-import { TElement } from "./TextSelect";
+import { TElement } from ".";
 
 interface NativeSelectProps<T extends number | string> {
   selectedValue: string | number;

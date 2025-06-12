@@ -3,11 +3,11 @@ import LoadingCard from "../../components/LoadingCard";
 import FiltersIcon from "../../assets/icons/FiltersIcon";
 import { Product } from "../../types/api.types";
 import ItemCard from "../../components/ItemCard";
-import TextSelect from "../../components/TextSelect/TextSelect";
+import TextSelect from "../../components/TextSelect";
 import { TSortCategories } from "../../utils/productsHeleprs";
 import { useSearchParams } from "react-router-dom";
-import useCategoriesApi from "../../api/useCategoriesApi";
 import useFilteredData from "../../contexts/FilteredDataContext";
+import useCategoryBySlug from "../../api/useCategoryBySlug";
 
 type TSortingElements = [TSortCategories, string][];
 const SORT_CATEGORIES: TSortingElements = [
@@ -35,40 +35,16 @@ let ProductList: React.FC<ProductListProps> = ({
   openFilters,
   ...rest
 }) => {
-  const categories = useCategoriesApi();
-  const [category, setCategory] = React.useState("All Products");
   const [initialSortParam, setInitialSortParam] = React.useState<
     TSortingElements[0]
   >(SORT_CATEGORIES[0]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const category = useCategoryBySlug(searchParams.get("category") || "");
+
   const { response, loading } = useFilteredData();
 
   const products = response?.products || null;
   const total = response?.total || 0;
-
-  const onSortItemSelect = (value: string) => {
-    if (value == "popular" && !searchParams.get("sort")) return;
-
-    const newParams = new URLSearchParams(searchParams);
-    newParams.set("sort", value);
-    setSearchParams(newParams);
-  };
-
-  useEffect(() => {
-    const paramCategory = searchParams.get("category");
-
-    if (!paramCategory) {
-      setCategory("All Products");
-      return;
-    }
-    if (category === paramCategory) return;
-
-    const currentCategory = categories?.find((c) => c.slug === paramCategory);
-
-    currentCategory
-      ? setCategory(currentCategory.name)
-      : setCategory("All Products");
-  }, [searchParams, categories]);
 
   useEffect(() => {
     const initialSortParam =
@@ -78,10 +54,18 @@ let ProductList: React.FC<ProductListProps> = ({
     setInitialSortParam(initialSortParam);
   }, [searchParams]);
 
+  const onSortItemSelect = (value: string) => {
+    if (value == "popular" && !searchParams.get("sort")) return;
+
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("sort", value);
+    setSearchParams(newParams);
+  };
+
   return (
     <section className={`${className}`} {...rest}>
       <article className="relative mb-4 flex flex-wrap items-baseline gap-y-2 lg:mb-9 lg:justify-between">
-        <h2 className="text-logo font-bold">{category}</h2>
+        <h2 className="text-logo font-bold">{category.name}</h2>
 
         <div className="contents lg:flex">
           {products && products.length > 0 && (

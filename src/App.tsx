@@ -3,7 +3,7 @@ import Layout from "./components/Layout.tsx";
 import Home from "./pages/Home.tsx";
 import { DataSimulationProvider } from "./contexts/DataSimulationContext.tsx";
 import RoutingScrollToTop from "./utils/RoutingScrollToTop.tsx";
-import CategoryOverlay from "./pages/Category/CategoryOverlay.tsx";
+import CategoryOverlay from "./pages/Category/index.tsx";
 import ItemPage from "./pages/ItemPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 

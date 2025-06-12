@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { calcRealValue } from "../utils/sliderFunctions"; // переконайся, що шлях правильний
+import { calcRealValue } from "../../utils/sliderFunctions"; // переконайся, що шлях правильний
 
 const PIN_DIAMETER_PX = 20;
 

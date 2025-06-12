@@ -3,7 +3,7 @@ import { tw } from "../utils/tailwindFunctions";
 import CloseIcon from "../assets/icons/CloseIcon";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import useCategoriesApi from "../api/useCategoriesApi";
-import DualIntegerRangeSlider from "../components/DualIntegerRangeSlider/DualIntegerRangeSlider";
+import DualIntegerRangeSlider from "../components/DualIntegerRangeSlider";
 import useFilteredData from "../contexts/FilteredDataContext";
 import Button from "../components/Button";
 

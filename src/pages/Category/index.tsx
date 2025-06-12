@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { FiltersProvider } from "../../contexts/FilteredDataContext";
-import Category from "./Category";
+import Category from "./CategoryContent";
 import { PRODUCT_PAGE_SIZE } from "../../constants";
 
 let CategoryOverlay: React.FC = () => {

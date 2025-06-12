@@ -5,7 +5,7 @@ import {
   calcRealValue,
   setGradient,
 } from "../../utils/sliderFunctions";
-import { useDualSliderPointerControl } from "../../hooks/useDualSliderPointerControl";
+import { useDualSliderPointerControl } from "./useDualSliderPointerControl";
 import SliderPin from "./SliderPin";
 
 interface DualIntegerRangeSliderProps

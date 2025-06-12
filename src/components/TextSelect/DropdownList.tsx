@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { tw } from "../../utils/tailwindFunctions";
-import { TElement } from "./TextSelect";
+import { TElement } from ".";
 import useDropdownAlignment from "./useDropdownAlignment";
 
 interface DropdownListProps<T extends number | string> {
