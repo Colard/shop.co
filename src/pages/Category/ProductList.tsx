@@ -101,6 +101,7 @@ let ProductList: React.FC<ProductListProps> = ({
       </article>
 
       <article className="grid grid-cols-2 gap-x-3 gap-y-6 lg:grid-cols-3 lg:gap-x-5 lg:gap-y-9">
+        <h3 className="sr-only">Products List</h3>
         <Products
           products={products}
           itemsOnPage={itemsOnPage}

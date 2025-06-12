@@ -3,7 +3,7 @@ import { Product } from "../../types/api.types";
 import PriceLine from "./PriceLine";
 
 interface ItemPageInstrumentsProps
-  extends Omit<React.ComponentPropsWithoutRef<"section">, "children"> {
+  extends Omit<React.ComponentPropsWithoutRef<"article">, "children"> {
   product: Product | null;
   isLoading: boolean;
 }
@@ -18,10 +18,11 @@ let ItemPageInstruments: React.FC<ItemPageInstrumentsProps> = ({
   }
 
   return (
-    <section className={className} {...rest}>
-      <h1 className="font-integralcf text-xl font-bold">
+    <article className={className} {...rest}>
+      <h3 className="sr-only">Item properties</h3>
+      <p className="font-integralcf text-xl font-bold">
         {product?.title || ""}
-      </h1>
+      </p>
 
       {/* Rating */}
       <div className="mt-3 flex items-center gap-1">
@@ -42,7 +43,7 @@ let ItemPageInstruments: React.FC<ItemPageInstrumentsProps> = ({
       ></PriceLine>
 
       <p>{product?.description || ""}</p>
-    </section>
+    </article>
   );
 };
 

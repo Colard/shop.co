@@ -11,6 +11,7 @@ interface BrandsProps
 let Brands: React.FC<BrandsProps> = ({ className, ...rest }) => {
   return (
     <section className={`bg-primary text-bg-color ${className}`} {...rest}>
+      <h2 className="sr-only">Our Brands</h2>
       <Container className="flex flex-wrap items-center justify-around gap-x-2 gap-y-5 py-10 md:gap-5 xl:justify-between">
         <VersaceIcon className="h-6 w-auto md:h-8"></VersaceIcon>
         <ZaraIcon className="h-6.5 w-auto md:h-10"></ZaraIcon>

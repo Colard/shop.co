@@ -12,6 +12,7 @@ interface HomeProps
 let Home: React.FC<HomeProps> = () => {
   return (
     <>
+      <h1 className="sr-only">Home</h1>
       <Hero className="h-full min-h-screen md:pt-10" />
       <Brands />
       <NewArrivals className="pt-12 md:pt-18" />

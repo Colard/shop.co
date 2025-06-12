@@ -22,7 +22,7 @@ let LinkWay: React.FC<LinkWayProps> = ({
   ];
 
   return (
-    <div
+    <nav
       className={`${className} base-text flex flex-wrap items-baseline gap-1.5`}
       {...rest}
     >
@@ -32,7 +32,7 @@ let LinkWay: React.FC<LinkWayProps> = ({
           <LinkWayElement pagePath={item} />
         </span>
       ))}
-    </div>
+    </nav>
   );
 };
 

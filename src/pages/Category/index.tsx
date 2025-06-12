@@ -31,6 +31,7 @@ let CategoryOverlay: React.FC = () => {
 
   return (
     <FiltersProvider page_size={PRODUCT_PAGE_SIZE} currentPage={currentPage}>
+      <h1 className="sr-only">Shop</h1>
       <Category currentPage={currentPage} />
     </FiltersProvider>
   );

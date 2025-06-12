@@ -13,12 +13,12 @@ let Hero: React.FC<HeroProps> = ({ className = "", ...rest }) => {
     >
       <Container className="text-shadow-secondary mt-10 flex flex-1 flex-col justify-center text-shadow-md md:mt-0">
         <div className="max-w-180">
-          <h1 className="font-integralcf text-primary text-4xl">
+          <h2 className="font-integralcf text-primary text-4xl">
             DISCOVER PRODUCTS <br />
             THAT MATCH YOUR
             <br /> LIFESTYLE
             <br />
-          </h1>
+          </h2>
           <p className="mt-5 md:mt-8">
             Explore our diverse collection of high-quality goods — from fashion
             and electronics to home essentials — all carefully selected to

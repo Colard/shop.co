@@ -40,10 +40,11 @@ let ItemIamges: React.FC<ItemIamgesProps> = ({
   }
 
   return (
-    <div
+    <article
       className={`flex flex-col gap-3 sm:flex-row-reverse ${className}`}
       {...rest}
     >
+      <h3 className="sr-only">Product images</h3>
       <div
         className={`bg-secondary flex flex-1 items-center justify-center rounded-[1.25rem] ${isfullSizedImage} sm:h-full`}
       >
@@ -61,7 +62,7 @@ let ItemIamges: React.FC<ItemIamgesProps> = ({
         selectedImage={selectedImage}
         onSelect={onSelect}
       ></ImagesList>
-    </div>
+    </article>
   );
 };
 

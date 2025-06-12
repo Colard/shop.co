@@ -59,7 +59,7 @@ interface MoveButtonsProps {
 
 let MoveButtons: React.FC<MoveButtonsProps> = ({ type, isLargeScreen }) => {
   return (
-    <div
+    <section
       className={`border-primary/10 h-9 w-fit border-1 px-2 md:px-3 ${btnCommonClassName}`}
     >
       {type === "prev" ? (
@@ -75,7 +75,7 @@ let MoveButtons: React.FC<MoveButtonsProps> = ({ type, isLargeScreen }) => {
           />
         </div>
       )}
-    </div>
+    </section>
   );
 };
 
