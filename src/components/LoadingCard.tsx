@@ -1,6 +1,7 @@
 import React from "react";
 import StarRating from "./StarRating";
-import loading from "../assets/images/load-icon.png";
+import LoadingImage from "./LoadingImage";
+import LoadingTextBlank from "./LoadingTextBlank";
 
 interface LoadingCardProps
   extends Omit<React.ComponentPropsWithoutRef<"article">, "children" | "id"> {}
@@ -11,18 +12,10 @@ let LoadingCard: React.FC<LoadingCardProps> = ({ className = "", ...rest }) => {
       className={`${className} w-full max-w-75 animate-pulse select-none`}
       {...rest}
     >
-      <div className="bg-secondary flex aspect-square w-full items-center justify-center rounded-[1.25rem]">
-        <img
-          draggable={false}
-          className={"animate-loadingSpin size-25 origin-center"}
-          src={loading}
-          alt={"loading..."}
-        ></img>
-      </div>
+      <LoadingImage className="aspect-square w-full rounded-[1.25rem]" />
 
-      <h3 className="bg-primary/10 mt-1 line-clamp-2 rounded-xl text-lg font-bold wrap-anywhere md:mt-2">
-        &nbsp;
-      </h3>
+      <LoadingTextBlank className="mt-1 line-clamp-2 text-lg font-bold wrap-anywhere md:mt-2" />
+
       <div className="flex w-full items-center">
         <StarRating
           starContainerClassName="gap-1.5"
@@ -32,7 +25,7 @@ let LoadingCard: React.FC<LoadingCardProps> = ({ className = "", ...rest }) => {
           style={{ opacity: 0.1 }}
         />
       </div>
-      <p className="text-card bg-primary/10 w-full rounded-xl">&nbsp;</p>
+      <LoadingTextBlank className="text-card" />
     </div>
   );
 };

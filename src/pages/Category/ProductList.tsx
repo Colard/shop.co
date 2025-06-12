@@ -19,6 +19,11 @@ const SORT_CATEGORIES: TSortingElements = [
   ["discount", "Discount"],
 ];
 
+const DEFAULT_CATEGORY = {
+  name: "All Products",
+  slug: "",
+};
+
 interface ProductListProps
   extends Omit<React.ComponentPropsWithoutRef<"div">, "children"> {
   currentPage: number;
@@ -39,10 +44,11 @@ let ProductList: React.FC<ProductListProps> = ({
     TSortingElements[0]
   >(SORT_CATEGORIES[0]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const category = useCategoryBySlug(searchParams.get("category") || "");
+
+  const currentCategorySlug = searchParams.get("category") || undefined;
+  const category = useCategoryBySlug(currentCategorySlug, DEFAULT_CATEGORY);
 
   const { response, loading } = useFilteredData();
-
   const products = response?.products || null;
   const total = response?.total || 0;
 
@@ -65,7 +71,9 @@ let ProductList: React.FC<ProductListProps> = ({
   return (
     <section className={`${className}`} {...rest}>
       <article className="relative mb-4 flex flex-wrap items-baseline gap-y-2 lg:mb-9 lg:justify-between">
-        <h2 className="text-logo font-bold">{category.name}</h2>
+        <h2 className="text-logo font-bold">
+          {category?.name || DEFAULT_CATEGORY.name}
+        </h2>
 
         <div className="contents lg:flex">
           {products && products.length > 0 && (

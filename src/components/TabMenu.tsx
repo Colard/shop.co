@@ -25,7 +25,7 @@ export default function TabMenu() {
             key={i}
             id={`tab-${i}`}
             onClick={() => setActiveIndex(i)}
-            className={`relative py-2 text-center transition md:flex-1 ${
+            className={`relative py-2 text-center transition sm:flex-1 ${
               i === activeIndex ? "text-black" : "text-gray-500"
             }`}
           >

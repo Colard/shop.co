@@ -54,6 +54,18 @@
   /* pagination */
   --spacing-pagination: clamp(2.25rem, 2.1571rem + 0.381vw, 2.5rem);
 
+  /* image block size  */
+  --spacing-image-block-main: clamp(
+    18.125rem,
+    12.5536rem + 22.8571vw,
+    33.125rem
+  ); /*530-290*/
+  --spacing-image-block: clamp(
+    25.5rem,
+    22.6679rem + 11.619vw,
+    33.125rem
+  ); /*530-408*/
+
   /*    RADIUS    */
   --radius-md: clamp(0.75rem, 0.5643rem + 0.7619vw, 1.25rem); /*20-12*/
   --radius-xl: clamp(1.25rem, 0.7857rem + 1.9048vw, 2.5rem); /*40-20*/

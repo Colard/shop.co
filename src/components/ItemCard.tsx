@@ -1,8 +1,8 @@
-import React, { SyntheticEvent } from "react";
+import React from "react";
 import StarRating from "./StarRating";
-import altImage from "../assets/images/error-image-photo-icon.png";
 import { tw } from "../utils/tailwindFunctions";
 import { Link } from "react-router-dom";
+import useImageErrorHandler from "../hooks/useImageErrorHandler";
 
 interface ItemCardProps
   extends Omit<React.ComponentPropsWithoutRef<"article">, "children" | "id"> {
@@ -24,15 +24,8 @@ let ItemCard: React.FC<ItemCardProps> = ({
   discountPercentage,
   ...rest
 }) => {
+  const { errorCallback, isLoadingError } = useImageErrorHandler();
   const errorImageClassName = tw`size-25 opacity-20`;
-
-  const imageErrorHandle = (e: SyntheticEvent<HTMLImageElement, Event>) => {
-    const target = e.target as HTMLImageElement;
-    target.onerror = null;
-    target.src = altImage;
-    target.className = errorImageClassName;
-  };
-
   return (
     <article
       className={`${className} overflow-clip transition-all duration-300 ease-in-out hover:scale-90 active:scale-90`}
@@ -45,10 +38,10 @@ let ItemCard: React.FC<ItemCardProps> = ({
         <div className="bg-secondary flex aspect-square size-full items-center justify-center overflow-clip rounded-[1.25rem]">
           <img
             draggable={false}
-            className={"size-full"}
+            className={isLoadingError ? errorImageClassName : "size-full"}
             src={thumbnail}
             alt={title}
-            onError={imageErrorHandle}
+            onError={errorCallback}
           ></img>
         </div>
         <h3 className="line-clamp-2 text-lg font-bold wrap-anywhere">

@@ -150,7 +150,7 @@ let FooterForm: React.FC = () => {
   return (
     <section className="w-full bg-[linear-gradient(to_bottom,var(--color-bg-color)_50%,var(--color-secondary)_50%)]">
       <Container>
-        <div className="bg-primary flex flex-col flex-wrap items-center justify-between gap-8 rounded-[20px] px-6 py-8 md:px-16 md:py-9 lg:flex-row lg:gap-5">
+        <div className="bg-primary flex flex-col flex-wrap items-center justify-between gap-8 rounded-[1.25rem] px-6 py-8 md:px-16 md:py-9 lg:flex-row lg:gap-5">
           <h2 className="font-integralcf text-bg-color max-w-max flex-1 shrink-1 self-start text-2xl lg:max-w-140 lg:basis-80">
             STAY UPTO DATE ABOUT OUR LATEST OFFERS
           </h2>

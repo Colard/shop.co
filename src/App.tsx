@@ -4,7 +4,7 @@ import Home from "./pages/Home.tsx";
 import { DataSimulationProvider } from "./contexts/DataSimulationContext.tsx";
 import RoutingScrollToTop from "./utils/RoutingScrollToTop.tsx";
 import CategoryOverlay from "./pages/Category/index.tsx";
-import ItemPage from "./pages/ItemPage.tsx";
+import ItemPage from "./pages/ItemPage/index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 function App() {

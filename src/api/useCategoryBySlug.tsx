@@ -2,30 +2,28 @@ import { useEffect, useState } from "react";
 import useCategoriesApi from "./useCategoriesApi";
 import { ProductCategory } from "../types/api.types";
 
-const baseCategory = {
-  name: "All Products",
-  slug: "",
-};
-
-const useCategoryBySlug = (slug: string, defaultCategory?: ProductCategory) => {
+const useCategoryBySlug = (
+  slug?: string,
+  defaultCategory?: ProductCategory,
+) => {
   const categories = useCategoriesApi();
 
-  const [category, setCategory] = useState<ProductCategory>(
-    defaultCategory || baseCategory,
+  const [category, setCategory] = useState<ProductCategory | undefined>(
+    defaultCategory,
   );
   useEffect(() => {
     if (!slug) {
-      setCategory(defaultCategory || baseCategory);
+      setCategory(undefined);
       return;
     }
 
-    if (category.slug === slug) return;
+    if (category?.slug === slug) return;
 
     const currentCategory = categories?.find((c) => c.slug === slug);
 
     currentCategory
       ? setCategory(currentCategory)
-      : setCategory(defaultCategory || baseCategory);
+      : setCategory(defaultCategory);
   }, [slug, categories, defaultCategory]);
 
   return category;
