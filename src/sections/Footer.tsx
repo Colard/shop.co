@@ -23,7 +23,7 @@ let Footer: React.FC = () => {
         <div className="justify-between lg:flex">
           <div>
             <Logo />
-            <p className="text-primary/60 mt-3 text-[0.875rem] lg:mt-6 lg:max-w-62">
+            <p className="base-text mt-3 lg:mt-6 lg:max-w-62">
               We have clothes that suits your style and which you’re proud to
               wear. From women to men.
             </p>
@@ -89,7 +89,7 @@ let Footer: React.FC = () => {
 
         <hr className="border-primary/10 mt-10 mb-4 lg:mt-12 lg:mb-6" />
         <div className="justify-between lg:flex">
-          <p className="text-primary/60 mb-4 text-center lg:m-0">
+          <p className="base-text mb-4 text-center lg:m-0">
             Shop.co © 2000-2023, All Rights Reserved
           </p>
           <div className="m-auto grid max-w-70 grid-flow-col place-items-center items-center gap-2.5 lg:m-0">

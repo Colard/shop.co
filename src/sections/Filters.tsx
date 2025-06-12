@@ -108,7 +108,7 @@ let Filters: React.FC<FiltersProps> = ({
           <h3 className={headerNameClassName}>Categories</h3>
         </div>
 
-        <div className="text-primary/60 flex flex-wrap gap-2 pb-5 text-[0.875rem]">
+        <div className="base-text flex flex-wrap gap-2 pb-5 text-[0.875rem]">
           {categories?.map((category) => (
             <CategoryButton
               key={category.slug}
@@ -126,7 +126,7 @@ let Filters: React.FC<FiltersProps> = ({
           <h3 className={headerNameClassName}>Price</h3>
         </div>
 
-        <div className="text-primary/60 flex flex-wrap gap-2 text-[0.875rem]">
+        <div className="base-text flex flex-wrap gap-2 text-[0.875rem]">
           <DualIntegerRangeSlider
             min={minPrice}
             max={maxPrice}
@@ -144,7 +144,7 @@ let Filters: React.FC<FiltersProps> = ({
           <h3 className={headerNameClassName}>Rating</h3>
         </div>
 
-        <div className="text-primary/60 flex flex-wrap gap-2 text-[0.875rem]">
+        <div className="base-text flex flex-wrap gap-2 text-[0.875rem]">
           <DualIntegerRangeSlider
             min={0}
             max={5}

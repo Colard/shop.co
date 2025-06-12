@@ -47,11 +47,11 @@ let ItemCard: React.FC<ItemCardProps> = ({
         <h3 className="line-clamp-2 text-lg font-bold wrap-anywhere">
           {title}
         </h3>
-        <div className="flex w-full items-center gap-1">
+        <div className="my-1 flex w-full items-center gap-1 md:my-2">
           <StarRating
             starContainerClassName="gap-1.5"
             rating={+rating.toFixed(1)}
-            className="my-1 h-5 w-auto md:my-2"
+            className="h-5 w-auto"
           />
           <p className="text-primary text-sm">
             {rating.toFixed(1)}/<span className="text-primary/60">5</span>

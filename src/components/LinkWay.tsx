@@ -23,7 +23,7 @@ let LinkWay: React.FC<LinkWayProps> = ({
 
   return (
     <div
-      className={`${className} text-primary/60 flex flex-wrap items-baseline gap-1.5`}
+      className={`${className} base-text flex flex-wrap items-baseline gap-1.5`}
       {...rest}
     >
       {fullPagePath.map((item, index) => (

@@ -32,7 +32,7 @@ let Comment: React.FC<CommentProps> = ({
         {name}
         <VerificationMark className="text-green aspect-square h-auto max-h-5 w-auto" />
       </p>
-      <p className="text-primary/60">{text}</p>
+      <p className="base-text">{text}</p>
     </article>
   );
 };
