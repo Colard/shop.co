@@ -1,11 +1,15 @@
 import { tw } from "../../utils/tailwindFunctions";
 
-interface BurgerMenuProps {
+interface BurgerMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   isActive: boolean;
   onClick: () => void;
 }
 
-let BurgerMenu: React.FC<BurgerMenuProps> = ({ isActive, onClick }) => {
+let BurgerMenu: React.FC<BurgerMenuProps> = ({
+  isActive,
+  onClick,
+  ...rest
+}) => {
   const burgerClassName = tw`relative z-20 mr-4 flex size-4 cursor-pointer items-center justify-center transition-all duration-300 lg:hidden`;
   const spanClass = tw`bg-primary absolute h-0.5 w-full rounded transition-all duration-300`;
 
@@ -13,6 +17,7 @@ let BurgerMenu: React.FC<BurgerMenuProps> = ({ isActive, onClick }) => {
     <div
       onClick={onClick}
       className={`${burgerClassName} ${isActive ? "rotate-y-180" : ""}`}
+      {...rest}
     >
       <span
         className={`${spanClass} ${isActive ? "rotate-45" : "-translate-y-1.5"}`}

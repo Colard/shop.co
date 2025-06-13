@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useCallback } from "react";
 import Container from "../../components/Container";
 import useDarkMode from "../../hooks/useDarkMode";
 import BurgerMenu from "./BurgerMenu";
 import NavBar from "./NavBar";
 import Instruments from "./Instruments";
 import Logo from "../../components/Logo";
-import { headerLinks } from "../../constants";
 
 interface HeaderProps
   extends Omit<React.ComponentPropsWithoutRef<"header">, "children"> {}
@@ -13,9 +12,8 @@ interface HeaderProps
 const Header: React.FC<HeaderProps> = ({ className = "", ...rest }) => {
   const [isMenuOpened, setMenuOpened] = React.useState(false);
 
-  const toggleMenu = () => {
-    setMenuOpened(!isMenuOpened);
-  };
+  const toggleMenu = useCallback(() => setMenuOpened((prev) => !prev), []);
+  const closeMenu = useCallback(() => setMenuOpened(false), []);
 
   const darkModeToggler = useDarkMode();
 
@@ -27,10 +25,14 @@ const Header: React.FC<HeaderProps> = ({ className = "", ...rest }) => {
       <Container className="border-b-primary/10 flex items-center justify-between border-b">
         <div className="flex h-full items-center lg:gap-10">
           <nav className="h-full lg:order-1 lg:h-auto">
-            <NavBar isOpen={isMenuOpened} links={headerLinks} />
+            <NavBar isOpen={isMenuOpened} closeMenu={closeMenu} />
           </nav>
 
-          <BurgerMenu isActive={isMenuOpened} onClick={toggleMenu} />
+          <BurgerMenu
+            isActive={isMenuOpened}
+            onClick={toggleMenu}
+            id="header-burger"
+          />
 
           <Logo className="z-20 -mt-2" />
         </div>

@@ -3,9 +3,9 @@ import {
   ReactNode,
   useCallback,
   useContext,
-  useEffect,
   useState,
 } from "react";
+import useHideScrollbar from "../hooks/useHideScrollbar";
 
 interface ContextData {
   showModal: (window: ReactNode) => void;
@@ -38,18 +38,7 @@ const ModalContextProvider: React.FC<ModalContextProps> = ({ children }) => {
   }, []);
 
   const hideModal = useCallback(() => setModal(null), []);
-
-  useEffect(() => {
-    if (modal === null) {
-      document.body.style.overflow = "auto";
-    } else {
-      document.body.style.overflow = "hidden";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [modal]);
+  useHideScrollbar(modal !== null);
 
   return (
     <ModalContext.Provider value={{ showModal, hideModal }}>
