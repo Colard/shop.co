@@ -73,7 +73,7 @@ const CommentsCarousel: React.FC<CommentsCarouselProps> = ({
 }) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [reviews, setReviews] = useState<Review[]>([]);
-  const { response } = useProductsApiSimulation({
+  const { response, loading } = useProductsApiSimulation({
     select: ["reviews"],
     limit: 8,
   });
@@ -106,42 +106,79 @@ const CommentsCarousel: React.FC<CommentsCarouselProps> = ({
           OUR HAPPY CUSTOMERS
         </h2>
 
-        <div className="flex gap-4 self-end">
-          <ArrowIcon
-            className="cursor-pointer select-none hover:opacity-70 active:opacity-70"
-            onClick={prevSlide}
-          ></ArrowIcon>
-          <ArrowIcon
-            className="scale-x-[-1] cursor-pointer select-none hover:opacity-70 active:opacity-70"
-            onClick={nextSlide}
-          ></ArrowIcon>
-        </div>
+        {!loading && reviews.length >= 2 && (
+          <div className="flex gap-4 self-end">
+            <ArrowIcon
+              className="cursor-pointer select-none hover:opacity-70 active:opacity-70"
+              onClick={prevSlide}
+            ></ArrowIcon>
+            <ArrowIcon
+              className="scale-x-[-1] cursor-pointer select-none hover:opacity-70 active:opacity-70"
+              onClick={nextSlide}
+            ></ArrowIcon>
+          </div>
+        )}
       </Container>
 
-      <Slider
-        ref={slider}
-        className="min-h-40"
-        {...carouselSettings}
-        beforeChange={(_current, next) => {
-          setActiveIndex(next);
-        }}
+      <CommentsCarouselALternate
+        isLoading={loading}
+        contentSize={reviews.length}
       >
-        {reviews.map((item, index) => (
-          <div className="px-2.5">
-            <CommentBlock
-              key={index}
-              rating={item.rating}
-              name={item.reviewerName}
-              text={item.comment}
-              className={`aspect-aspect-[100/48] mx-auto h-full min-h-40 w-full p-6 transition-all duration-500 select-none ${
-                range.includes(index) ? "blur-none" : "blur-[2px]"
-              } `}
-            />
-          </div>
-        ))}
-      </Slider>
+        <Slider
+          ref={slider}
+          className="min-h-40"
+          {...carouselSettings}
+          beforeChange={(_current, next) => {
+            setActiveIndex(next);
+          }}
+        >
+          {reviews.map((item, index) => (
+            <div className="px-2.5">
+              <CommentBlock
+                key={index}
+                rating={item.rating}
+                name={item.reviewerName}
+                text={item.comment}
+                className={`aspect-aspect-[100/48] mx-auto h-full min-h-40 w-full p-6 transition-all duration-500 select-none ${
+                  range.includes(index) ? "blur-none" : "blur-[2px]"
+                } `}
+              />
+            </div>
+          ))}
+        </Slider>
+      </CommentsCarouselALternate>
     </section>
   );
+};
+
+interface CommentsCarouselALternateProps {
+  children: React.ReactNode;
+  isLoading?: boolean;
+  contentSize?: number;
+}
+
+let CommentsCarouselALternate: React.FC<CommentsCarouselALternateProps> = ({
+  children,
+  isLoading,
+  contentSize = 0,
+}) => {
+  if (isLoading) {
+    return (
+      <p className="text-primary/40 col-span-2 w-full py-8 text-center text-3xl font-bold lg:col-span-3">
+        Comments are loading...
+      </p>
+    );
+  }
+
+  if (!contentSize) {
+    return (
+      <p className="text-primary/40 col-span-2 w-full py-8 text-center text-3xl font-bold lg:col-span-3">
+        Comments not found.
+      </p>
+    );
+  }
+
+  return children;
 };
 
 export default CommentsCarousel;
