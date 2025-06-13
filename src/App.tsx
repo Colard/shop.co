@@ -6,23 +6,26 @@ import RoutingScrollToTop from "./utils/RoutingScrollToTop.tsx";
 import CategoryOverlay from "./pages/Category/index.tsx";
 import ItemPage from "./pages/ItemPage/index.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import { ModalContextProvider } from "./contexts/ModalProviderContext.tsx";
 
 function App() {
   return (
     <Router>
       <DataSimulationProvider>
-        <RoutingScrollToTop />
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
+        <ModalContextProvider>
+          <RoutingScrollToTop />
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
 
-            <Route path="page/:page" element={<CategoryOverlay />} />
+              <Route path="page/:page" element={<CategoryOverlay />} />
 
-            <Route path="product/:id" element={<ItemPage />}></Route>
+              <Route path="product/:id" element={<ItemPage />}></Route>
 
-            <Route path="*" element={<NotFound />}></Route>
-          </Route>
-        </Routes>
+              <Route path="*" element={<NotFound />}></Route>
+            </Route>
+          </Routes>
+        </ModalContextProvider>
       </DataSimulationProvider>
     </Router>
   );

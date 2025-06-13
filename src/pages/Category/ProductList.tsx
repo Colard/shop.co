@@ -123,7 +123,7 @@ let Products: React.FC<ProductsProps> = ({
   itemsOnPage,
   loading,
 }) => {
-  if (!products || loading) {
+  if (loading) {
     return (
       <>
         {Array.from({ length: itemsOnPage }).map((_, i) => (
@@ -133,7 +133,7 @@ let Products: React.FC<ProductsProps> = ({
     );
   }
 
-  if (products.length === 0) {
+  if (!products || products.length === 0) {
     return (
       <p className="text-primary/40 col-span-2 w-full py-32 text-center text-3xl font-bold lg:col-span-3">
         No products found.

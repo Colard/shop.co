@@ -44,7 +44,11 @@ const useProductsApiSimulation = (initFilters: FilterParams) => {
     let cancelled = false;
 
     const fetch = async () => {
-      if (!Array.isArray(data)) return;
+      if (!Array.isArray(data)) {
+        setLoading(false);
+        setError(new Error("No data from API"));
+        return;
+      }
 
       setLoading(true);
       setError(null);

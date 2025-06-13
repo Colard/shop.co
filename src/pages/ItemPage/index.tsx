@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Container from "../../components/Container";
 import LinkWay from "../../components/LinkWay";
 import useSingleProductApiSimulation from "../../api/useSingleProductApiSimulation";

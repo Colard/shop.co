@@ -20,7 +20,6 @@ let Comment: React.FC<CommentProps> = ({
       className={`${className} border-primary/10 h-full max-h-60 max-w-100 rounded-[1.25rem] border-1`}
       {...rest}
     >
-      {" "}
       <div className="w-max">
         <StarRating
           rating={rating || 0}

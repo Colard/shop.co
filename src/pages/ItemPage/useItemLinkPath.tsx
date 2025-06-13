@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Product } from "../../types/api.types";
-import { useNavigate } from "react-router-dom";
 import useCategoryBySlug from "../../api/useCategoryBySlug";
 import { TLinkWayPath } from "../../types/componentsProps.types";
 
