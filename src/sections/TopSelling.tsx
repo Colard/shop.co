@@ -16,12 +16,16 @@ interface TopSellingProps
   extends Omit<React.ComponentPropsWithoutRef<"section">, "children"> {}
 
 let TopSelling: React.FC<TopSellingProps> = ({ className = "", ...rest }) => {
-  const { response } = useProductsApiSimulation(productsApiProps);
+  const { response, loading } = useProductsApiSimulation(productsApiProps);
 
   return (
     <Container>
       <section>
-        <ItemsLine header="Top Selling" products={response?.products || []} />
+        <ItemsLine
+          isLoading={loading}
+          header="Top Selling"
+          products={response?.products || []}
+        />
         <Button
           className={`${className} bg-bg-color inset-shadow-primary/50 text-primary border-secondary mt-6 block h-13 w-full border-2 md:mx-auto md:mt-9 md:w-55`}
           {...rest}

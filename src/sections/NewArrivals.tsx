@@ -16,12 +16,16 @@ interface NewArrivalsProps
   extends Omit<React.ComponentPropsWithoutRef<"section">, "children"> {}
 
 let NewArrivals: React.FC<NewArrivalsProps> = ({ className = "", ...rest }) => {
-  const { response } = useProductsApiSimulation(productsApiProps);
+  const { response, loading } = useProductsApiSimulation(productsApiProps);
 
   return (
     <Container className={`${className}`} {...rest}>
       <section>
-        <ItemsLine header="New Arrivals" products={response?.products || []} />
+        <ItemsLine
+          isLoading={loading}
+          header="New Arrivals"
+          products={response?.products || []}
+        />
         <Button className="bg-bg-color inset-shadow-primary/50 text-primary border-secondary mt-6 block h-13 w-full border-2 md:mx-auto md:mt-9 md:w-55">
           View All
         </Button>
