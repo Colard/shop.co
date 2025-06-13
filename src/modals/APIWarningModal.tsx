@@ -8,7 +8,7 @@ interface ModalProps {
 let APIWarningModal: React.FC<ModalProps> = ({ hideWarning }) => {
   return (
     <div className="bg-bg-color rounded-2xl p-5">
-      <p className="bg-star-yellow flex items-center rounded-sm px-2 text-2xl font-bold">
+      <p className="bg-star-yellow flex items-center rounded-sm px-2 text-2xl font-bold text-black">
         <RiskIcon className="bg-star-yellow h-[1em]"></RiskIcon> WARNING!
       </p>
       <div className="m-5">
