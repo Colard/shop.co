@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Container from "../../components/Container";
 import LinkWay from "../../components/LinkWay";
 import useSingleProductApiSimulation from "../../api/useSingleProductApiSimulation";
@@ -6,6 +6,7 @@ import TabMenu from "../../components/TabMenu";
 import useItemLinkPath from "./useItemLinkPath";
 import ItemIamges from "../../sections/ItemIamgesBlock";
 import ItemPageInstruments from "../../sections/ItemPageInstruments";
+import useNotFoundRedirect from "../../hooks/useNotFoundRedirect";
 
 let ItemPage: React.FC = () => {
   const params = useParams();
@@ -13,7 +14,8 @@ let ItemPage: React.FC = () => {
     +(params.id || -1),
   );
 
-  const linkPath = useItemLinkPath(product, isLoading);
+  useNotFoundRedirect(!product && !isLoading);
+  const linkPath = useItemLinkPath(product);
 
   return (
     <div>

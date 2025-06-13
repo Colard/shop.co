@@ -33,7 +33,6 @@ interface ScrollContentProps {
 }
 
 let ScrollContent: React.FC<ScrollContentProps> = ({ products, isLoading }) => {
-  console.log(isLoading);
   if (isLoading) {
     return (
       <ItemsScroll

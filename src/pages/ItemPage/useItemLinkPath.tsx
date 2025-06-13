@@ -11,17 +11,12 @@ const initialLinkPath = [
   },
 ];
 
-const useItemLinkPath = (product: Product | null, isLoading: boolean) => {
-  const navigate = useNavigate();
+const useItemLinkPath = (product: Product | null) => {
   const [itemLPaths, setItemLPaths] = useState<TLinkWayPath[]>(initialLinkPath);
 
   const category = useCategoryBySlug(product?.category || "");
 
   useEffect(() => {
-    if (!product && !isLoading) {
-      navigate("/404");
-    }
-
     if (product) {
       const newPath: TLinkWayPath[] = [...initialLinkPath];
 
@@ -36,7 +31,7 @@ const useItemLinkPath = (product: Product | null, isLoading: boolean) => {
 
       setItemLPaths(newPath);
     }
-  }, [product, isLoading, category]);
+  }, [product, category]);
 
   return itemLPaths;
 };
