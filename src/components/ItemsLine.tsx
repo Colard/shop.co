@@ -43,16 +43,18 @@ let ScrollContent: React.FC<ScrollContentProps> = ({ products, isLoading }) => {
   }
 
   if (products.length) {
-    <ItemsScroll
-      extractKey={(item) => item.id}
-      elements={products}
-      renderFunction={(item) => (
-        <ItemCard {...item} className="min-w-50 flex-1" />
-      )}
-    ></ItemsScroll>;
+    return (
+      <ItemsScroll
+        extractKey={(item) => item.id}
+        elements={products}
+        renderFunction={(item) => (
+          <ItemCard {...item} className="min-w-50 flex-1" />
+        )}
+      ></ItemsScroll>
+    );
   }
 
-  if (!products.length) {
+  if (!products?.length) {
     return (
       <p className="text-primary/40 col-span-2 w-full py-8 text-center text-3xl font-bold lg:col-span-3">
         No products found.
