@@ -33,7 +33,7 @@ let ItemCard: React.FC<ItemCardProps> = ({
 
   return (
     <article
-      className={`${className} overflow-clip transition-all duration-300 ease-in-out hover:scale-90 active:scale-90 ${inStock ? "" : "opacity-40"}`}
+      className={`${className} overflow-clip transition-all duration-300 ease-in-out hover:scale-90 active:scale-90 ${inStock ? "" : "opacity-60"}`}
       {...rest}
     >
       <Link
