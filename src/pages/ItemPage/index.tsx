@@ -22,11 +22,11 @@ let ItemPage: React.FC = () => {
       <h1 className="sr-only">{product?.title || ""}</h1>
       <Container>
         <LinkWay pagePath={linkPath} className="my-5 md:mt-6 md:mb-9"></LinkWay>
-        <section className="gap-10 xl:flow-root">
+        <section className="gap-10 xl:flex">
           <h2 className="sr-only">General info</h2>
 
           <ItemIamges
-            className="h-image-block mx-auto w-full lg:max-w-152.5 xl:float-left xl:mx-0"
+            className="h-image-block mx-auto w-full shrink-0 xl:mx-0 xl:max-w-152.5"
             images={product?.images || []}
             itemTitle={product?.title || ""}
             isLoading={isLoading}
@@ -34,10 +34,10 @@ let ItemPage: React.FC = () => {
           <ItemPageInstruments
             product={product}
             isLoading={isLoading}
-            className="mt-5 inline-block xl:mt-0 xl:ml-10"
+            className="xl:min-h-image-block mt-5 w-full xl:mt-0"
           />
         </section>
-        <TabMenu></TabMenu>
+        <TabMenu className="mt-12 lg:mt-20"></TabMenu>
       </Container>
     </div>
   );

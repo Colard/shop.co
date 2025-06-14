@@ -2,7 +2,10 @@ import { useEffect, useRef, useState } from "react";
 
 const tabs = ["Елемент 1", "Елемент 2", "Елемент 3"];
 
-export default function TabMenu() {
+interface TabMenuProps
+  extends Omit<React.ComponentPropsWithoutRef<"div">, "children"> {}
+
+const TabMenu: React.FC<TabMenuProps> = ({ className = "", ...rest }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const lineRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -18,7 +21,11 @@ export default function TabMenu() {
   }, [activeIndex]);
 
   return (
-    <div className="relative bg-gray-300" ref={menuRef}>
+    <div
+      className={`relative bg-gray-300 ${className}`}
+      {...rest}
+      ref={menuRef}
+    >
       <div className="flex justify-between">
         {tabs.map((label, i) => (
           <button
@@ -39,4 +46,5 @@ export default function TabMenu() {
       />
     </div>
   );
-}
+};
+export default TabMenu;
