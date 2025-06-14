@@ -24,11 +24,14 @@ let Category: React.FC<CategoryProps> = ({ currentPage }) => {
   }, []);
   const { response } = useFilteredData();
 
-  const handlePageChange = useCallback((selectedItem: { selected: number }) => {
-    if (selectedItem.selected !== currentPage - 1) {
-      navigate(`/page/${selectedItem.selected + 1}${location.search}`);
-    }
-  }, []);
+  const handlePageChange = useCallback(
+    (selectedItem: { selected: number }) => {
+      if (selectedItem.selected !== currentPage - 1) {
+        navigate(`/page/${selectedItem.selected + 1}${location.search}`);
+      }
+    },
+    [currentPage, navigate, location.search],
+  );
 
   return (
     <Container className="pt-5 pb-12 md:pt-6 md:pb-20">
