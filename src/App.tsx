@@ -7,6 +7,7 @@ import CategoryOverlay from "./pages/Category/index.tsx";
 import ItemPage from "./pages/ItemPage/index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import { ModalContextProvider } from "./contexts/ModalProviderContext.tsx";
+import APIWarningModalWatcher from "./components/APIWarningModalWatcher.tsx";
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
       <DataSimulationProvider>
         <ModalContextProvider>
           <RoutingScrollToTop />
+          <APIWarningModalWatcher />
+
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />

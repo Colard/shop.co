@@ -3,6 +3,7 @@ import {
   ReactNode,
   useCallback,
   useContext,
+  useMemo,
   useState,
 } from "react";
 import useHideScrollbar from "../hooks/useHideScrollbar";
@@ -40,9 +41,15 @@ const ModalContextProvider: React.FC<ModalContextProps> = ({ children }) => {
   const hideModal = useCallback(() => setModal(null), []);
   useHideScrollbar(modal !== null);
 
+  const value = useMemo(
+    () => ({ showModal, hideModal }),
+    [showModal, hideModal],
+  );
+
   return (
-    <ModalContext.Provider value={{ showModal, hideModal }}>
+    <ModalContext.Provider value={value}>
       {children}
+
       {modal && (
         <div
           className="bg-primary/20 fixed inset-0 z-1000 flex items-center justify-center p-10 backdrop-blur-sm"
