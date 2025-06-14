@@ -3,6 +3,7 @@ import StarRating from "./StarRating";
 import { tw } from "../utils/tailwindFunctions";
 import { Link } from "react-router-dom";
 import useImageErrorHandler from "../hooks/useImageErrorHandler";
+import { checkInStok } from "../utils/productsHeleprs";
 
 interface ItemCardProps
   extends Omit<React.ComponentPropsWithoutRef<"article">, "children" | "id"> {
@@ -11,6 +12,7 @@ interface ItemCardProps
   rating: number;
   title: string;
   price: number;
+  availabilityStatus: string;
   discountPercentage: number;
 }
 
@@ -21,14 +23,17 @@ let ItemCard: React.FC<ItemCardProps> = ({
   rating,
   title,
   price,
+  availabilityStatus,
   discountPercentage,
   ...rest
 }) => {
   const { errorCallback, isLoadingError } = useImageErrorHandler();
   const errorImageClassName = tw`size-25 opacity-20`;
+  const inStock = checkInStok(availabilityStatus);
+
   return (
     <article
-      className={`${className} overflow-clip transition-all duration-300 ease-in-out hover:scale-90 active:scale-90`}
+      className={`${className} overflow-clip transition-all duration-300 ease-in-out hover:scale-90 active:scale-90 ${inStock ? "" : "opacity-40"}`}
       {...rest}
     >
       <Link

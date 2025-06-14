@@ -25,28 +25,47 @@ export const filterProductsByCategory = (
   );
 };
 
-export const sortProducts = (
+export const checkInStok = (availabilityStatus: string) => {
+  return /^In/gi.test(availabilityStatus);
+};
+
+/*             SORTING FUNCTIONS          */
+type TSortingFunction<T> = (a: T, b: T) => number;
+
+function sortByAvailabilityDecorator<T extends Product>(
+  f: TSortingFunction<T>,
+) {
+  return (a: T, b: T) => {
+    const isAinStock = checkInStok(a.availabilityStatus);
+    const isBinStock = checkInStok(b.availabilityStatus);
+    if (isAinStock !== isBinStock) {
+      return +isBinStock - +isAinStock;
+    }
+    return f(a, b);
+  };
+}
+
+export const sortProductsByPrice = (products: Product[], order: TOrder) => {
+  /*remove discount <= 10 %*/
+  const calcRealPrice = (p: Product) =>
+    p.discountPercentage > 0
+      ? p.price * (1 - p.discountPercentage / 100)
+      : p.price;
+
+  const compare = (a: Product, b: Product) => {
+    return order === "asc"
+      ? calcRealPrice(a) - calcRealPrice(b)
+      : calcRealPrice(b) - calcRealPrice(a);
+  };
+
+  return [...products].sort(sortByAvailabilityDecorator(compare));
+};
+
+export const sortProductsByRawParameter = (
   products: Product[],
-  sortBy: keyof Product | null = null,
-  order: TOrder = "asc",
-): Product[] => {
-  if (!Array.isArray(products) || products.length === 0 || sortBy === null)
-    return [...products];
-
-  if (sortBy === "price") {
-    /*remove discount <= 10 %*/
-    const calcRealPrice = (p: Product) =>
-      p.discountPercentage >= 10
-        ? p.price * (1 - p.discountPercentage / 100)
-        : p.price;
-
-    return [...products].sort((a, b) =>
-      order === "asc"
-        ? calcRealPrice(a) - calcRealPrice(b)
-        : calcRealPrice(b) - calcRealPrice(a),
-    );
-  }
-
+  sortBy: keyof Product,
+  order: TOrder,
+) => {
   const compare = (a: Product, b: Product): number => {
     const aValue = a[sortBy];
     const bValue = b[sortBy];
@@ -64,7 +83,22 @@ export const sortProducts = (
     return 0;
   };
 
-  return [...products].sort(compare);
+  return [...products].sort(sortByAvailabilityDecorator(compare));
+};
+
+export const sortProducts = (
+  products: Product[],
+  sortBy: keyof Product | null = null,
+  order: TOrder = "asc",
+): Product[] => {
+  if (!Array.isArray(products) || products.length === 0 || sortBy === null)
+    return [...products];
+
+  if (sortBy === "price") {
+    return sortProductsByPrice(products, order);
+  }
+
+  return sortProductsByRawParameter(products, sortBy, order);
 };
 
 export const sliceProducts = (
@@ -105,7 +139,7 @@ export function filterProductsDiscount(products: Product[]): Product[] {
   });
 }
 
-/*    SORTING    */
+/*    SORTING  PARAMS  */
 
 export type TSortCategories =
   | "newest"

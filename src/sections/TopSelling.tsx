@@ -9,7 +9,15 @@ const productsApiProps: FilterParams = {
   sortBy: "discountPercentage",
   order: "desc",
   limit: 4,
-  select: ["id", "title", "thumbnail", "price", "discountPercentage", "rating"],
+  select: [
+    "id",
+    "title",
+    "thumbnail",
+    "price",
+    "discountPercentage",
+    "rating",
+    "availabilityStatus",
+  ],
 };
 
 interface TopSellingProps

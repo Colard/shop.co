@@ -8,6 +8,12 @@ import ItemIamges from "../../sections/ItemIamgesBlock";
 import ItemPageInstruments from "../../sections/ItemPageInstruments";
 import useNotFoundRedirect from "../../hooks/useNotFoundRedirect";
 
+const tabMenuItems = [
+  { title: "Description", callBack: () => {} },
+  { title: "Rating & Reviews", callBack: () => {} },
+  { title: "FAQs", callBack: () => {} },
+];
+
 let ItemPage: React.FC = () => {
   const params = useParams();
   const { product, isLoading } = useSingleProductApiSimulation(
@@ -37,7 +43,10 @@ let ItemPage: React.FC = () => {
             className="xl:min-h-image-block mt-5 w-full xl:mt-0"
           />
         </section>
-        <TabMenu className="mt-12 lg:mt-20"></TabMenu>
+        <TabMenu
+          className="mt-12 mb-20 lg:mt-20"
+          menuElements={tabMenuItems}
+        ></TabMenu>
       </Container>
     </div>
   );

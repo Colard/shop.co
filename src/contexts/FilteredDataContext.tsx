@@ -22,6 +22,7 @@ const SELECT_FIELDS: (keyof Product)[] = [
   "price",
   "discountPercentage",
   "rating",
+  "availabilityStatus",
 ];
 
 interface FiltersProviderContextProps {
@@ -36,6 +37,7 @@ export const FiltersProvider: React.FC<FiltersProviderContextProps> = ({
   currentPage,
 }) => {
   const [searchParams] = useSearchParams();
+
   const filters = useMemo<FilterParams>(
     () => ({
       limit: page_size,
