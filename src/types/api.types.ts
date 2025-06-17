@@ -38,7 +38,7 @@ export interface Meta {
   updatedAt: string;
 }
 
-export type TOrder = "asc" | "desc";
+export type TOrder = "asc" | "desc" | "rnd";
 
 export interface FilterParams {
   category?: string;

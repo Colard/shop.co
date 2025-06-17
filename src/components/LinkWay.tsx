@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import LinkWayArrow from "../assets/icons/LinkWayArrow";
-import React from "react";
+import React, { Fragment } from "react";
 import { TLinkWayPath } from "../types/componentsProps.types";
 
 interface LinkWayProps
@@ -27,10 +27,10 @@ let LinkWay: React.FC<LinkWayProps> = ({
       {...rest}
     >
       {fullPagePath.map((item, index) => (
-        <span key={index} className="flex items-baseline gap-1.5">
+        <Fragment key={index}>
           {index > 0 && <LinkWayArrow className="aspect-square h-[0.8em]" />}
           <LinkWayElement pagePath={item} />
-        </span>
+        </Fragment>
       ))}
     </nav>
   );
@@ -43,11 +43,11 @@ interface LinkWayElementProps {
 let LinkWayElement: React.FC<LinkWayElementProps> = ({ pagePath }) => {
   const unActiveClassName = "cursor-default text-primary";
   if (typeof pagePath === "string") {
-    return <p className={`${unActiveClassName}`}>{pagePath}</p>;
+    return <span className={`${unActiveClassName}`}>{pagePath}</span>;
   }
 
   if (!pagePath.path) {
-    return <p className={`${unActiveClassName}`}>{pagePath.name}</p>;
+    return <span className={`${unActiveClassName}`}>{pagePath.name}</span>;
   }
 
   return (

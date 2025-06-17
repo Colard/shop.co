@@ -1,13 +1,13 @@
 import React from "react";
 import Container from "../components/Container";
 import ItemsLine from "../components/ItemsLine";
-import Button from "../components/Button";
 import useProductsApiSimulation from "../api/useProductsApiSimultion";
 import { FilterParams } from "../types/api.types";
+import { Link } from "react-router-dom";
 
 const productsApiProps: FilterParams = {
   sortBy: "id",
-  order: "desc",
+  order: "asc",
   limit: 4,
   select: [
     "id",
@@ -34,9 +34,12 @@ let NewArrivals: React.FC<NewArrivalsProps> = ({ className = "", ...rest }) => {
           header="New Arrivals"
           products={response?.products || []}
         />
-        <Button className="bg-bg-color inset-shadow-primary/50 text-primary border-secondary mt-6 block h-13 w-full border-2 md:mx-auto md:mt-9 md:w-55">
+        <Link
+          to="/page/1?sort=newest"
+          className="bg-bg-color text-primary border-secondary mt-6 flex h-13 w-full items-center justify-center rounded-full border-2 transition-all duration-300 hover:scale-95 active:scale-95 md:mx-auto md:mt-9 md:w-55"
+        >
           View All
-        </Button>
+        </Link>
       </section>
     </Container>
   );

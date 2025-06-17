@@ -2,8 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import { FilterParams, ProductResponse } from "../types/api.types";
 import useData from "../contexts/DataSimulationContext";
 import {
-  filteringFunction,
   filterProductsByCategory,
+  filterProductsByParams,
   pickProperties,
   sliceProducts,
   sortProducts,
@@ -57,13 +57,15 @@ const useProductsApiSimulation = (initFilters: FilterParams) => {
         await new Promise((res) => setTimeout(res, 500));
         if (cancelled) return;
 
+        /*First filter need for counting products and find price range*/
         const filteredByCategory = filterProductsByCategory(
           data,
           filters.category,
         );
 
+        /*Second filter need for apply other filters*/
         const filteredFull = filteredByCategory.filter((p) =>
-          filteringFunction(p, filters),
+          filterProductsByParams(p, filters),
         );
 
         const sorted = sortProducts(

@@ -2,7 +2,10 @@ import { FilterParams, Product, TOrder } from "../types/api.types";
 
 /*     SERVER SIMULAION FUNCTIONS        */
 
-export const filteringFunction = (product: Product, filters: FilterParams) => {
+export const filterProductsByParams = (
+  product: Product,
+  filters: FilterParams,
+) => {
   const hasDiscount = product.discountPercentage > 10;
   const realPrice = hasDiscount
     ? product.price * (1 - product.discountPercentage / 100)
@@ -86,6 +89,11 @@ export const sortProductsByRawParameter = (
   return [...products].sort(sortByAvailabilityDecorator(compare));
 };
 
+export const shuffleArray = (array: Product[]) => {
+  const compare = () => Math.random() - 0.5;
+  return [...array].sort(sortByAvailabilityDecorator(compare));
+};
+
 export const sortProducts = (
   products: Product[],
   sortBy: keyof Product | null = null,
@@ -93,6 +101,10 @@ export const sortProducts = (
 ): Product[] => {
   if (!Array.isArray(products) || products.length === 0 || sortBy === null)
     return [...products];
+
+  if (order === "rnd") {
+    return shuffleArray(products);
+  }
 
   if (sortBy === "price") {
     return sortProductsByPrice(products, order);

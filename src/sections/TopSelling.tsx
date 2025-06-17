@@ -1,12 +1,12 @@
 import React from "react";
 import Container from "../components/Container";
 import ItemsLine from "../components/ItemsLine";
-import Button from "../components/Button";
 import useProductsApiSimulation from "../api/useProductsApiSimultion";
 import { FilterParams } from "../types/api.types";
+import { Link } from "react-router-dom";
 
 const productsApiProps: FilterParams = {
-  sortBy: "discountPercentage",
+  sortBy: "rating",
   order: "desc",
   limit: 4,
   select: [
@@ -27,19 +27,19 @@ let TopSelling: React.FC<TopSellingProps> = ({ className = "", ...rest }) => {
   const { response, loading } = useProductsApiSimulation(productsApiProps);
 
   return (
-    <Container>
+    <Container className={`${className}`} {...rest}>
       <section>
         <ItemsLine
           isLoading={loading}
           header="Top Selling"
           products={response?.products || []}
         />
-        <Button
-          className={`${className} bg-bg-color inset-shadow-primary/50 text-primary border-secondary mt-6 block h-13 w-full border-2 md:mx-auto md:mt-9 md:w-55`}
-          {...rest}
+        <Link
+          to={`/page/1?sort=popular`}
+          className="bg-bg-color text-primary border-secondary mt-6 flex h-13 w-full items-center justify-center rounded-full border-2 transition-all duration-300 hover:scale-95 active:scale-95 md:mx-auto md:mt-9 md:w-55"
         >
           View All
-        </Button>
+        </Link>
       </section>
     </Container>
   );
