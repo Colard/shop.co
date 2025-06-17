@@ -6,7 +6,6 @@ interface PageTitleProps {
 }
 
 let PageTitle: React.FC<PageTitleProps> = ({ title }) => {
-  console.log(title);
   return (
     <Helmet>
       <title>{`Shop.Co - ${title}`}</title>

@@ -139,7 +139,7 @@ const CommentsCarousel: React.FC<CommentsCarouselProps> = ({
                 rating={item.rating}
                 name={item.reviewerName}
                 text={item.comment}
-                className={`aspect-aspect-[100/48] mx-auto h-full min-h-40 w-full p-6 transition-all duration-500 select-none ${
+                className={`aspect-aspect-[100/48] mx-auto h-full max-h-60 min-h-40 w-full max-w-100 p-6 transition-all duration-500 select-none ${
                   range.includes(index) ? "blur-none" : "blur-[2px]"
                 } `}
               />

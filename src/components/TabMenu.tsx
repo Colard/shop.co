@@ -27,12 +27,11 @@ interface TabMenuProps
 }
 
 const TabMenu: React.FC<TabMenuProps> = ({
-  activeTab = 0,
   className = "",
   menuElements,
   ...rest
 }) => {
-  const [activeIndex, setActiveIndex] = useState(activeTab);
+  const [activeIndex, setActiveIndex] = useState(0);
   const lineRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -41,6 +40,7 @@ const TabMenu: React.FC<TabMenuProps> = ({
 
   useEffect(() => {
     activeIndexRef.current = activeIndex;
+    menuElements[activeIndex].callBack();
   }, [activeIndex]);
 
   useEffect(() => {
@@ -70,7 +70,6 @@ const TabMenu: React.FC<TabMenuProps> = ({
             data-tab={`${i}`}
             onClick={() => {
               setActiveIndex(i);
-              element.callBack();
             }}
             className={`relative pb-3 text-center text-lg leading-[1.375rem] transition sm:flex-1 md:pb-4 ${
               i === activeIndex ? "text-primary" : "text-primary/60"
