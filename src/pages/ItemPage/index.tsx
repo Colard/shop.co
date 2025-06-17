@@ -31,7 +31,11 @@ let ItemPage: React.FC = () => {
 
         <ItemPageTabMenu product={product} />
 
-        <AlsoLike category={product?.category} productId={product?.id} />
+        <AlsoLike
+          className="my-10"
+          category={product?.category}
+          productId={product?.id}
+        />
       </Container>
     </div>
   );

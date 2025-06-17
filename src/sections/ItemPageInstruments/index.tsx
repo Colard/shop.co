@@ -1,10 +1,10 @@
 import { useCallback } from "react";
-import QuantitySelector from "../../components/QuantitySelector";
 import StarRating from "../../components/StarRating";
 import { Product } from "../../types/api.types";
 import PriceLine from "./PriceLine";
-import Button from "../../components/Button";
 import { checkInStok } from "../../utils/productsHeleprs";
+import InstrumentsFooter from "./InstrumentsFooter";
+import LoadingTextBlank from "../../components/LoadingTextBlank";
 
 interface ItemPageInstrumentsProps
   extends Omit<React.ComponentPropsWithoutRef<"article">, "children"> {
@@ -19,14 +19,17 @@ let ItemPageInstruments: React.FC<ItemPageInstrumentsProps> = ({
   ...rest
 }) => {
   if (isLoading) {
+    return <ItemPageInstrumentsLoading />;
   }
 
   const onChangeQuantity = useCallback((value: number) => {}, []);
 
   return (
-    <article className={`flex flex-col ${className}`} {...rest}>
+    <article className={`flex w-full flex-col ${className}`} {...rest}>
       <div className="flex-1">
         <h3 className="sr-only">Item properties</h3>
+
+        {/* Title */}
         <p className="font-integralcf text-xl font-bold">
           {product?.title || ""}
         </p>
@@ -51,7 +54,6 @@ let ItemPageInstruments: React.FC<ItemPageInstrumentsProps> = ({
 
         {/* Description */}
         <p className="text-base">{product?.description || ""}</p>
-
         <hr className="border-primary/10 my-6" />
       </div>
 
@@ -66,27 +68,30 @@ let ItemPageInstruments: React.FC<ItemPageInstrumentsProps> = ({
   );
 };
 
-interface InstrumentsFooterProps {
-  isAvailable: boolean;
-  onChangeQuantity: (value: number) => void;
-}
+export default ItemPageInstruments;
 
-let InstrumentsFooter: React.FC<InstrumentsFooterProps> = ({
-  isAvailable,
-  onChangeQuantity,
+interface ItemPageInstrumentsLoadingProps
+  extends Omit<React.ComponentPropsWithoutRef<"article">, "children"> {}
+
+const ItemPageInstrumentsLoading: React.FC<ItemPageInstrumentsLoadingProps> = ({
+  className = "",
+  ...rest
 }) => {
-  if (!isAvailable) {
-    return <p className="text-discount text-2xl font-bold">Out of stock</p>;
-  }
-
   return (
-    <div className="mx-auto flex w-full justify-between gap-3 lg:gap-5">
-      <QuantitySelector onChangeQuantity={onChangeQuantity} />
-      <Button className="bg-primary text-bg-color max-w-100 flex-1">
-        Add to Cart
-      </Button>
-    </div>
+    <article
+      className={`flex w-full animate-pulse flex-col ${className}`}
+      {...rest}
+    >
+      <h3 className="sr-only">Item properties</h3>
+      {/* Title */}
+      <LoadingTextBlank className="font-integralcf mb-2 text-xl font-bold" />
+      {/* Rating */}
+      <LoadingTextBlank className="h-7"></LoadingTextBlank>
+      {/* Price */}
+      <LoadingTextBlank className="text-item-price my-2" />
+      {/* Description */}
+      <LoadingTextBlank className="text-base" />
+      <hr className="border-primary/10 my-6" />
+    </article>
   );
 };
-
-export default ItemPageInstruments;

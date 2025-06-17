@@ -18,7 +18,7 @@ let ProductDetails: React.FC<ProductDetailsProps> = ({
 
   return (
     <section className={`flex flex-col gap-5 ${className}`} {...rest}>
-      <h2 className="font-integralcf text-2xl font-bold">Product Details</h2>
+      <h2 className="sr-only">Product Details</h2>
 
       {/*Description*/}
       {description && (

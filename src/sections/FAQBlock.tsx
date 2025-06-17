@@ -14,7 +14,7 @@ let FAQBlock: React.FC<FAQBlockProps> = ({
 }) => {
   return (
     <section className={`flex flex-col gap-5 ${className}`} {...rest}>
-      <h2 className="font-integralcf text-2xl font-bold">
+      <h2 className="sr-only">
         FAQ<span>s</span>
       </h2>
 
