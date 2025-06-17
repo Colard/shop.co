@@ -1,7 +1,6 @@
 import { FilterParams, Product, TOrder } from "../types/api.types";
 
-/*     SERVER SIMULAION FUNCTIONS        */
-
+/*     FILTERING        */
 export const filterProductsByParams = (
   product: Product,
   filters: FilterParams,
@@ -31,6 +30,37 @@ export const filterProductsByCategory = (
 export const checkInStok = (availabilityStatus: string) => {
   return /^In/gi.test(availabilityStatus);
 };
+
+/*    SORTING  PARAMS  */
+export type TSortCategories =
+  | "newest"
+  | "oldest"
+  | "price-asc"
+  | "price-desc"
+  | "popular"
+  | "discount";
+
+export type TSsortingDictionary = {
+  [key in TSortCategories]: [keyof Product, TOrder];
+};
+
+export const sortCategories: TSsortingDictionary = {
+  newest: ["id", "asc"],
+  oldest: ["id", "desc"],
+  "price-asc": ["price", "asc"],
+  "price-desc": ["price", "desc"],
+  popular: ["rating", "desc"],
+  discount: ["discountPercentage", "desc"],
+};
+
+export function createSortingParams(key: TSortCategories): FilterParams {
+  if (!sortCategories[key]) return createSortingParams("popular");
+
+  return {
+    sortBy: sortCategories[key][0],
+    order: sortCategories[key][1],
+  };
+}
 
 /*             SORTING FUNCTIONS          */
 type TSortingFunction<T> = (a: T, b: T) => number;
@@ -91,7 +121,10 @@ export const sortProductsByRawParameter = (
 
 export const shuffleArray = (array: Product[]) => {
   const compare = () => Math.random() - 0.5;
-  return [...array].sort(sortByAvailabilityDecorator(compare));
+  const { inStock, outStock } = separateProductsByAvailability(array);
+  const shuffeledInStock = inStock.sort(sortByAvailabilityDecorator(compare));
+  const shuffeledOutStock = outStock.sort(sortByAvailabilityDecorator(compare));
+  return [...shuffeledInStock, ...shuffeledOutStock];
 };
 
 export const sortProducts = (
@@ -111,6 +144,34 @@ export const sortProducts = (
   }
 
   return sortProductsByRawParameter(products, sortBy, order);
+};
+
+/*   DISCOUNT FILTERING    */
+// !!! ADDED FOR TESTING WITH API !!!
+export function filterProductsDiscount(products: Product[]): Product[] {
+  return products.map((el) => {
+    return {
+      ...el,
+      discountPercentage:
+        el.discountPercentage < 10 ? 0 : Math.round(el.discountPercentage),
+    };
+  });
+}
+
+/*    ADDITIONAL FUNCTIONS   */
+
+export const separateProductsByAvailability = (products: Product[]) => {
+  return products.reduce(
+    (acc, el) => {
+      const isAvailable = checkInStok(el.availabilityStatus);
+      const param = isAvailable ? "inStock" : "outStock";
+      return {
+        ...acc,
+        [param]: [...acc[param], el],
+      };
+    },
+    { inStock: [] as Product[], outStock: [] as Product[] },
+  );
 };
 
 export const sliceProducts = (
@@ -137,48 +198,4 @@ export function pickProperties<T extends object, K extends keyof T>(
   });
 
   return result;
-}
-
-/*   DISCOUNT FILTERING    */
-// !!! ADDED FOR TESTING WITH API !!!
-export function filterProductsDiscount(products: Product[]): Product[] {
-  return products.map((el) => {
-    return {
-      ...el,
-      discountPercentage:
-        el.discountPercentage < 10 ? 0 : Math.round(el.discountPercentage),
-    };
-  });
-}
-
-/*    SORTING  PARAMS  */
-
-export type TSortCategories =
-  | "newest"
-  | "oldest"
-  | "price-asc"
-  | "price-desc"
-  | "popular"
-  | "discount";
-
-export type TSsortingDictionary = {
-  [key in TSortCategories]: [keyof Product, TOrder];
-};
-
-export const sortCategories: TSsortingDictionary = {
-  newest: ["id", "asc"],
-  oldest: ["id", "desc"],
-  "price-asc": ["price", "asc"],
-  "price-desc": ["price", "desc"],
-  popular: ["rating", "desc"],
-  discount: ["discountPercentage", "desc"],
-};
-
-export function createSortingParams(key: TSortCategories): FilterParams {
-  if (!sortCategories[key]) return createSortingParams("popular");
-
-  return {
-    sortBy: sortCategories[key][0],
-    order: sortCategories[key][1],
-  };
 }

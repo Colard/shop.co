@@ -57,6 +57,7 @@ const useProductsApiSimulation = (initFilters: FilterParams) => {
         await new Promise((res) => setTimeout(res, 500));
         if (cancelled) return;
 
+        //Filtering
         /*First filter need for counting products and find price range*/
         const filteredByCategory = filterProductsByCategory(
           data,
@@ -68,17 +69,20 @@ const useProductsApiSimulation = (initFilters: FilterParams) => {
           filterProductsByParams(p, filters),
         );
 
+        //Sorting
         const sorted = sortProducts(
           filteredFull,
           filters.sortBy,
           filters.order,
         );
 
+        //Limits
         const sliced = sliceProducts(sorted, filters.limit, filters.skip);
         const cleaned = filters.select
           ? sliced.map((p) => pickProperties(p, filters.select))
           : sliced;
 
+        //Find price range
         const discountedPrices = filteredByCategory.map((p) =>
           p.discountPercentage >= 10
             ? p.price * (1 - p.discountPercentage / 100)
