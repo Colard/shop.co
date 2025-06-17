@@ -47,7 +47,10 @@ const useSingleProductApiSimulation = (id?: number) => {
 
         const productData = data.find((p) => p.id === id) || null;
 
-        setProduct(productData);
+        if (JSON.stringify(productData) !== JSON.stringify(product)) {
+          setProduct(productData);
+        }
+
         cache.set(id, productData);
       } catch (e) {
         if (cancelled) return;

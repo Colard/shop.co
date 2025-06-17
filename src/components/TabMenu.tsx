@@ -23,14 +23,16 @@ interface MenuElement {
 interface TabMenuProps
   extends Omit<React.ComponentPropsWithoutRef<"div">, "children"> {
   menuElements: MenuElement[];
+  activeTab?: number;
 }
 
 const TabMenu: React.FC<TabMenuProps> = ({
+  activeTab = 0,
   className = "",
   menuElements,
   ...rest
 }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(activeTab);
   const lineRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 

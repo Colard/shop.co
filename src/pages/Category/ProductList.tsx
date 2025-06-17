@@ -8,6 +8,7 @@ import { TSortCategories } from "../../utils/productsHeleprs";
 import { useSearchParams } from "react-router-dom";
 import useFilteredData from "../../contexts/FilteredDataContext";
 import useCategoryBySlug from "../../api/useCategoryBySlug";
+import PageTitle from "../../components/PageTitle";
 
 type TSortingElements = [TSortCategories, string][];
 const SORT_CATEGORIES: TSortingElements = [
@@ -70,6 +71,8 @@ let ProductList: React.FC<ProductListProps> = ({
 
   return (
     <section className={`${className}`} {...rest}>
+      <PageTitle title={category?.name || DEFAULT_CATEGORY.name} />
+
       <article className="relative mb-4 flex flex-wrap items-baseline gap-y-2 lg:mb-9 lg:justify-between">
         <h2 className="text-logo font-bold">
           {category?.name || DEFAULT_CATEGORY.name}

@@ -4,6 +4,7 @@ import StarRating from "../../components/StarRating";
 import { Product } from "../../types/api.types";
 import PriceLine from "./PriceLine";
 import Button from "../../components/Button";
+import { checkInStok } from "../../utils/productsHeleprs";
 
 interface ItemPageInstrumentsProps
   extends Omit<React.ComponentPropsWithoutRef<"article">, "children"> {
@@ -54,13 +55,37 @@ let ItemPageInstruments: React.FC<ItemPageInstrumentsProps> = ({
         <hr className="border-primary/10 my-6" />
       </div>
 
-      <div className="mx-auto flex w-full justify-between gap-3 lg:gap-5">
-        <QuantitySelector onChangeQuantity={onChangeQuantity} />
-        <Button className="bg-primary text-bg-color max-w-100 flex-1">
-          Add to Cart
-        </Button>
-      </div>
+      <InstrumentsFooter
+        isAvailable={
+          !!product?.availabilityStatus &&
+          checkInStok(product.availabilityStatus)
+        }
+        onChangeQuantity={onChangeQuantity}
+      />
     </article>
+  );
+};
+
+interface InstrumentsFooterProps {
+  isAvailable: boolean;
+  onChangeQuantity: (value: number) => void;
+}
+
+let InstrumentsFooter: React.FC<InstrumentsFooterProps> = ({
+  isAvailable,
+  onChangeQuantity,
+}) => {
+  if (!isAvailable) {
+    return <p className="text-discount text-2xl font-bold">Out of stock</p>;
+  }
+
+  return (
+    <div className="mx-auto flex w-full justify-between gap-3 lg:gap-5">
+      <QuantitySelector onChangeQuantity={onChangeQuantity} />
+      <Button className="bg-primary text-bg-color max-w-100 flex-1">
+        Add to Cart
+      </Button>
+    </div>
   );
 };
 

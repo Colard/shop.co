@@ -4,20 +4,26 @@ import LinkWay from "../../components/LinkWay";
 import useSingleProductApiSimulation from "../../api/useSingleProductApiSimulation";
 import TabMenu from "../../components/TabMenu";
 import useItemLinkPath from "./useItemLinkPath";
-import ItemIamges from "../../sections/ItemIamgesBlock";
-import ItemPageInstruments from "../../sections/ItemPageInstruments";
 import useNotFoundRedirect from "../../hooks/useNotFoundRedirect";
-import { memo } from "react";
 import { Product } from "../../types/api.types";
-
-const tabMenuItems = [
-  { title: "Description", callBack: () => {} },
-  { title: "Rating & Reviews", callBack: () => {} },
-  { title: "FAQs", callBack: () => {} },
-];
+import ProductStructuredData from "../../components/ProductStructuredData";
+import { useMemo, useState } from "react";
+import ItemGeneralInfo from "./ItemGeneralInfo";
+import PageTitle from "../../components/PageTitle";
 
 let ItemPage: React.FC = () => {
   const params = useParams();
+  const [activeTab, setActiveTab] = useState(0);
+
+  const tabMenuItems = useMemo(
+    () => [
+      { title: "Description", callBack: () => {} },
+      { title: "Rating & Reviews", callBack: () => {} },
+      { title: "FAQs", callBack: () => {} },
+    ],
+    [],
+  );
+
   const { product, isLoading } = useSingleProductApiSimulation(
     +(params.id || -1),
   );
@@ -27,26 +33,22 @@ let ItemPage: React.FC = () => {
   return (
     <div>
       <h1 className="sr-only">{product?.title || ""}</h1>
+
+      {product && <PageTitle title={product.title} />}
+      {product && <ProductStructuredData product={product} />}
       <Container>
-        <section className="gap-10 xl:flex">
-          <h2 className="sr-only">General info</h2>
-          <ProductLinkWay product={product} />
-          <ItemIamges
-            className="h-image-block mx-auto w-full shrink-0 xl:mx-0 xl:max-w-152.5"
-            images={product?.images || []}
-            itemTitle={product?.title || ""}
-            isLoading={isLoading}
-          />
-          <ItemPageInstruments
-            product={product}
-            isLoading={isLoading}
-            className="xl:min-h-image-block mt-5 w-full xl:mt-0"
-          />
-        </section>
+        <ProductLinkWay product={product} />
+
+        <ItemGeneralInfo product={product} isLoading={isLoading} />
+
+        {/* Pages */}
         <TabMenu
+          activeTab={activeTab}
           className="mt-12 mb-20 lg:mt-20"
           menuElements={tabMenuItems}
         ></TabMenu>
+
+        <div></div>
       </Container>
     </div>
   );

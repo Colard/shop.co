@@ -5,6 +5,7 @@ import Container from "../components/Container";
 import TopSelling from "../sections/TopSelling";
 import DressStyles from "../sections/DressStyles";
 import CommentsCarousel from "../sections/CommentsCarousel";
+import PageTitle from "../components/PageTitle";
 
 interface HomeProps
   extends Omit<React.ComponentPropsWithoutRef<"div">, "children"> {}
@@ -12,6 +13,7 @@ interface HomeProps
 let Home: React.FC<HomeProps> = () => {
   return (
     <>
+      <PageTitle title="Home" />
       <h1 className="sr-only">Home</h1>
       <Hero className="h-full min-h-screen md:pt-10" />
       <Brands />
