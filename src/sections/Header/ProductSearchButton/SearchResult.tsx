@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { useSearchContext } from "../../contexts/SearchInputContext";
+import { useSearchContext } from "../../../contexts/SearchInputContext";
 import { Link } from "react-router-dom";
 
 let SearchResult: React.FC = memo(() => {

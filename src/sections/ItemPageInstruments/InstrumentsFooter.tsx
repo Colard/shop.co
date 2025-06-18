@@ -15,7 +15,7 @@ interface InstrumentsFooterProps {
 }
 
 let InstrumentsFooter: React.FC<InstrumentsFooterProps> = ({ product }) => {
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const { addItem, getItemById, removeItem } = useCartStore();
   const { showModal, hideModal } = useModal();
 

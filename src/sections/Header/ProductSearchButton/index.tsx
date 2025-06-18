@@ -1,11 +1,11 @@
 import { memo, useCallback, useRef } from "react";
 import SearchContextProvider, {
   useSearchContext,
-} from "../../contexts/SearchInputContext";
-import useClickOutside from "../../hooks/useClickOutside";
-import { tw } from "../../utils/tailwindFunctions";
-import SearchIcon from "../../assets/icons/SearchIcon";
-import SVGButton from "../SVGButton";
+} from "../../../contexts/SearchInputContext";
+import useClickOutside from "../../../hooks/useClickOutside";
+import { tw } from "../../../utils/tailwindFunctions";
+import SearchIcon from "../../../assets/icons/SearchIcon";
+import SVGButton from "../../../components/SVGButton";
 import SearchCloseButton from "./SearchCloseButton";
 import SearchInput from "./SearchInput";
 import SearchResult from "./SearchResult";

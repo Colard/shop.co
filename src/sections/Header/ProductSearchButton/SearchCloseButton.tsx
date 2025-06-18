@@ -1,6 +1,6 @@
-import CloseIcon from "../../assets/icons/CloseIcon";
-import { useSearchContext } from "../../contexts/SearchInputContext";
-import SVGButton from "../SVGButton";
+import CloseIcon from "../../../assets/icons/CloseIcon";
+import { useSearchContext } from "../../../contexts/SearchInputContext";
+import SVGButton from "../../../components/SVGButton";
 
 interface SearchCloseButtonProps {
   className: string;

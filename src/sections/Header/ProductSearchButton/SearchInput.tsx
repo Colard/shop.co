@@ -1,5 +1,5 @@
 import { KeyboardEventHandler } from "react";
-import { useSearchContext } from "../../contexts/SearchInputContext";
+import { useSearchContext } from "../../../contexts/SearchInputContext";
 
 interface SearchInputProps {
   refInput: React.RefObject<HTMLInputElement | null>;
