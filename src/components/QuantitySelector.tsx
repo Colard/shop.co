@@ -1,24 +1,19 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import MinusIcon from "../assets/icons/MinusIcon";
 import PlusIcon from "../assets/icons/PlusIcon";
 
 interface QuantitySelectorProps
   extends Omit<React.ComponentPropsWithoutRef<"div">, "children"> {
+  value?: number;
   onChangeQuantity?: (value: number) => void;
 }
 
 let QuantitySelector: React.FC<QuantitySelectorProps> = ({
   className = "",
   onChangeQuantity,
+  value = 0,
   ...rest
 }) => {
-  const [value, setValue] = useState(0);
-
-  useEffect(() => {
-    if (onChangeQuantity) onChangeQuantity(value);
-  }, [value, onChangeQuantity]);
-
   const clickBtn = (e: React.SyntheticEvent<HTMLButtonElement>) => {
     const element = e.currentTarget;
     element.classList.remove("animate-pop");
@@ -28,12 +23,12 @@ let QuantitySelector: React.FC<QuantitySelectorProps> = ({
 
   const clickMinus = (e: React.SyntheticEvent<HTMLButtonElement>) => {
     clickBtn(e);
-    setValue((prev) => (prev > 0 ? prev - 1 : 0));
+    if (onChangeQuantity) onChangeQuantity(value - 1);
   };
 
   const clickPlus = (e: React.SyntheticEvent<HTMLButtonElement>) => {
     clickBtn(e);
-    setValue((prev) => prev + 1);
+    if (onChangeQuantity) onChangeQuantity(value + 1);
   };
 
   return (

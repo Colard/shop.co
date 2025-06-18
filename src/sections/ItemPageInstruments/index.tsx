@@ -1,8 +1,6 @@
-import { useCallback } from "react";
 import StarRating from "../../components/StarRating";
 import { Product } from "../../types/api.types";
 import PriceLine from "./PriceLine";
-import { checkInStok } from "../../utils/productsHeleprs";
 import InstrumentsFooter from "./InstrumentsFooter";
 import LoadingTextBlank from "../../components/LoadingTextBlank";
 
@@ -21,8 +19,6 @@ let ItemPageInstruments: React.FC<ItemPageInstrumentsProps> = ({
   if (isLoading) {
     return <ItemPageInstrumentsLoading />;
   }
-
-  const onChangeQuantity = useCallback((value: number) => {}, []);
 
   return (
     <article className={`flex w-full flex-col ${className}`} {...rest}>
@@ -57,13 +53,7 @@ let ItemPageInstruments: React.FC<ItemPageInstrumentsProps> = ({
         <hr className="border-primary/10 my-6" />
       </div>
 
-      <InstrumentsFooter
-        isAvailable={
-          !!product?.availabilityStatus &&
-          checkInStok(product.availabilityStatus)
-        }
-        onChangeQuantity={onChangeQuantity}
-      />
+      <InstrumentsFooter product={product} />
     </article>
   );
 };

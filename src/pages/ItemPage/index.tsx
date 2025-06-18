@@ -24,6 +24,7 @@ let ItemPage: React.FC = () => {
 
       {product && <PageTitle title={product.title} />}
       {product && <ProductStructuredData product={product} />}
+
       <Container>
         <ProductLinkWay product={product} />
 

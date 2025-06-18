@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
 import Container from "../../components/Container";
-import useDarkMode from "../../hooks/useDarkMode";
 import BurgerMenu from "./BurgerMenu";
 import NavBar from "./NavBar";
 import Instruments from "./Instruments";
@@ -14,8 +13,6 @@ const Header: React.FC<HeaderProps> = ({ className = "", ...rest }) => {
 
   const toggleMenu = useCallback(() => setMenuOpened((prev) => !prev), []);
   const closeMenu = useCallback(() => setMenuOpened(false), []);
-
-  const darkModeToggler = useDarkMode();
 
   return (
     <header
@@ -36,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({ className = "", ...rest }) => {
 
           <Logo className="z-20 -mt-2" />
         </div>
-        <Instruments darkModeToggler={darkModeToggler}></Instruments>
+        <Instruments />
       </Container>
     </header>
   );
