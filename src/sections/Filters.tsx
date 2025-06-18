@@ -61,7 +61,7 @@ let Filters: React.FC<FiltersProps> = ({
 
       setSearchParams(newParams);
     },
-    [searchParams, setSearchParams],
+    [searchParams, setSearchParams, minPrice, maxPrice],
   );
 
   const setRatingRange = useCallback(

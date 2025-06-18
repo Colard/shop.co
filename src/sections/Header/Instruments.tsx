@@ -1,8 +1,9 @@
 import CartIcon from "../../assets/icons/CartIcon";
 import DarkModeIcon from "../../assets/icons/DarkModeIcon";
-import SearchIcon from "../../assets/icons/SearchIcon";
 import SVGButton from "../../components/SVGButton";
 import { tw } from "../../utils/tailwindFunctions";
+
+import ProductSearchButton from "../../components/ProductSearchButton";
 
 interface InstrumentsProps {
   darkModeToggler: () => void;
@@ -13,16 +14,7 @@ let Instruments: React.FC<InstrumentsProps> = ({ darkModeToggler }) => {
 
   return (
     <div className="flex items-center gap-3 md:contents md:gap-4">
-      <div className="md:bg-secondary mx-10 contents h-12 flex-1 items-center rounded-full px-4 md:flex">
-        <SVGButton
-          svg={<SearchIcon />}
-          className={`${buttonClassName} md:opacity-40 md:transition-none md:duration-0 md:before:hidden md:hover:scale-100 md:active:scale-100`}
-        ></SVGButton>
-        <input
-          className="placeholder:text-primary/40 hidden w-full px-3 outline-none md:block"
-          placeholder="Search for products..."
-        ></input>
-      </div>
+      <ProductSearchButton className={buttonClassName} />
 
       <SVGButton svg={<CartIcon />} className={buttonClassName}></SVGButton>
 
