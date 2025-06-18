@@ -1,5 +1,4 @@
 import { memo } from "react";
-import { Helmet } from "react-helmet-async";
 
 interface PageTitleProps {
   title: string;
@@ -7,14 +6,14 @@ interface PageTitleProps {
 
 let PageTitle: React.FC<PageTitleProps> = ({ title }) => {
   return (
-    <Helmet>
+    <>
       <title>{`Shop.Co - ${title}`}</title>
       <meta
         name="title"
         content={`Shop.Co - ${title}`}
         data-react-helmet="true"
       />
-    </Helmet>
+    </>
   );
 };
 
