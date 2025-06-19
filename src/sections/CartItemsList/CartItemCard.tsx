@@ -5,6 +5,7 @@ import QuantitySelector from "../../components/QuantitySelector";
 import { useCartStore } from "../../stores/cartStore";
 import { CartItem } from "../../types/api.types";
 import { Link } from "react-router-dom";
+import { calcPriceWithDiscound } from "../../utils/productsHeleprs";
 
 interface CartItemCardProps
   extends Omit<React.ComponentPropsWithoutRef<"article">, "children"> {
@@ -35,52 +36,63 @@ let CartItemCard: React.FC<CartItemCardProps> = ({
     [addItem, removeItem, item],
   );
 
+  const removeItemFromCart = () => removeItem(item.id);
+
+  const clickOnDelete = () => {
+    removeItemFromCart();
+  };
+
+  const itemPrice = calcPriceWithDiscound(item.price, item.discount);
+
   return (
     <article className={`${className}`} {...rest}>
-      <Link to={"/product/" + item.id}>
-        <div className="flex">
-          <div className="size-cart-item-image bg-secondary mr-4 aspect-square">
+      <div className="flex">
+        <Link to={"/product/" + item.id}>
+          <div className="size-cart-item-image bg-secondary mr-4 aspect-square overflow-clip rounded-lg">
             <img
               src={item.thumbnail}
               alt={item.title}
               loading="lazy"
-              className="size-full rounded-lg object-cover"
+              className="size-full object-cover"
             />
           </div>
+        </Link>
+
+        <div className="flex w-full min-w-0 flex-col justify-between">
           {/*Item info*/}
-          <div className="flex w-full min-w-0 flex-col justify-between">
-            <div className="flex min-w-0 justify-between">
-              <h3 className="line-clamp-2 flex-1 text-lg font-bold">
-                {item.title}
-              </h3>
-              <Button className="self-start">
-                <BinIcon className="text-red ml-2 aspect-square size-5 h-full cursor-pointer" />
-              </Button>
+
+          <div className="flex min-w-0 justify-between">
+            <Link to={"/product/" + item.id}>
+              <h3 className="line-clamp-2 text-lg font-bold">{item.title}</h3>
+            </Link>
+
+            <Button onClick={clickOnDelete} className="self-start">
+              <BinIcon className="text-red ml-2 aspect-square size-5 h-full cursor-pointer" />
+            </Button>
+          </div>
+
+          {/*Item control*/}
+          {isLarge && (
+            <div className="flex items-center justify-between">
+              <p className="text-card font-bold">${itemPrice}</p>
+              <QuantitySelector
+                value={currQuantity}
+                onChangeQuantity={onChangeQuantity}
+              />
             </div>
-
-            {/*Item control*/}
-            {isLarge && (
-              <div className="flex items-center justify-between">
-                <p className="text-card font-bold">${item.price}</p>
-                <QuantitySelector
-                  value={currQuantity}
-                  onChangeQuantity={onChangeQuantity}
-                />
-              </div>
-            )}
-          </div>
+          )}
         </div>
+      </div>
 
-        {!isLarge && (
-          <div className="flex items-center justify-between">
-            <p className="text-card font-bold">${item.price}</p>
-            <QuantitySelector
-              value={currQuantity}
-              onChangeQuantity={onChangeQuantity}
-            />
-          </div>
-        )}
-      </Link>
+      {!isLarge && (
+        <div className="flex items-center justify-between">
+          <p className="text-card font-bold">${itemPrice}</p>
+          <QuantitySelector
+            value={currQuantity}
+            onChangeQuantity={onChangeQuantity}
+          />
+        </div>
+      )}
     </article>
   );
 };

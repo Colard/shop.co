@@ -199,3 +199,7 @@ export function pickProperties<T extends object, K extends keyof T>(
 
   return result;
 }
+
+export const calcPriceWithDiscound = (price: number, discount: number) => {
+  return +(Math.round(price * (1 - discount / 100) * 100) / 100).toFixed(2);
+};

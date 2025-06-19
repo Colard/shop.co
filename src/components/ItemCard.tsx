@@ -3,7 +3,7 @@ import StarRating from "./StarRating";
 import { tw } from "../utils/tailwindFunctions";
 import { Link } from "react-router-dom";
 import useImageErrorHandler from "../hooks/useImageErrorHandler";
-import { checkInStok } from "../utils/productsHeleprs";
+import { calcPriceWithDiscound, checkInStok } from "../utils/productsHeleprs";
 
 interface ItemCardProps
   extends Omit<React.ComponentPropsWithoutRef<"article">, "children" | "id"> {
@@ -76,7 +76,7 @@ interface PriceProps {
 let Price: React.FC<PriceProps> = ({ discount, price }) => {
   let priceLabel: React.ReactNode = null;
   if (discount > 0) {
-    const priceWithDiscount = (price * ((100 - discount) / 100)).toFixed(2);
+    const priceWithDiscount = calcPriceWithDiscound(price, discount);
     priceLabel = (
       <>
         <p>${priceWithDiscount}</p>
