@@ -3,7 +3,7 @@ interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
 }
 
 let Button: React.FC<ButtonProps> = ({
-  className,
+  className = "",
   children,
   onClick,
   ...rest
@@ -11,7 +11,7 @@ let Button: React.FC<ButtonProps> = ({
   return (
     <button
       onClick={onClick}
-      className={`rounded-full transition-all duration-300 hover:scale-95 active:scale-95 ${className || ""}`}
+      className={`rounded-full transition-all duration-300 hover:scale-95 active:scale-95 ${className}`}
       {...rest}
     >
       {children}

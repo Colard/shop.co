@@ -9,6 +9,7 @@ import ItemAddedToCartModal from "../../modals/CartModals/ItemAddedToCartModal";
 import ItemsQuantityChangedModal from "../../modals/CartModals/ItemsQuantityChangedModal";
 import ItemDeletedModal from "../../modals/CartModals/ItemDeletedModal";
 import { checkInStok } from "../../utils/productsHeleprs";
+import BinIcon from "../../assets/icons/BinIcon";
 
 interface InstrumentsFooterProps {
   product: Product | null;
@@ -51,22 +52,38 @@ let InstrumentsFooter: React.FC<InstrumentsFooterProps> = ({ product }) => {
     );
   };
 
+  const removeItemFromCart = () => {
+    removeItem(product?.id || -1);
+    showModal(
+      <ItemDeletedModal title={product?.title || ""} hideModal={hideModal} />,
+    );
+  };
+
   const isAvailable =
     !!product?.availabilityStatus && checkInStok(product.availabilityStatus);
 
   if (!isAvailable) {
-    return <p className="text-discount text-2xl font-bold">Out of stock</p>;
+    return <p className="text-red text-2xl font-bold">Out of stock</p>;
   }
 
   return (
-    <div className="mx-auto flex w-full justify-between gap-3 lg:gap-5">
+    <div className="mx-auto flex max-h-13 w-full justify-between gap-3 lg:gap-5">
       <QuantitySelector value={quantity} onChangeQuantity={setQuantity} />
-      <Button
-        className="bg-primary text-bg-color max-w-100 flex-1"
-        onClick={handleCartUpdate}
-      >
-        {cartItem ? "Update Cart" : "Add to Cart"}
-      </Button>
+
+      <div className="flex max-w-100 flex-1">
+        <Button
+          className="bg-primary text-bg-color w-full"
+          onClick={handleCartUpdate}
+        >
+          {cartItem ? "Update Cart" : "Add to Cart"}
+        </Button>
+
+        {cartItem && (
+          <Button onClick={removeItemFromCart}>
+            <BinIcon className="text-red ml-2 aspect-square h-full cursor-pointer" />
+          </Button>
+        )}
+      </div>
     </div>
   );
 };

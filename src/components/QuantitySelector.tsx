@@ -33,7 +33,7 @@ let QuantitySelector: React.FC<QuantitySelectorProps> = ({
 
   return (
     <div
-      className={`w-quantity-selector bg-secondary flex justify-between rounded-full px-4 py-3 lg:px-4 lg:py-3 ${className}`}
+      className={`w-quantity-selector bg-secondary flex justify-between rounded-full px-4 py-3 lg:px-5 lg:py-4 ${className}`}
       {...rest}
     >
       <button className="cursor-pointer" onClick={clickMinus}>
