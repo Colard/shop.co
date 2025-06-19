@@ -15,7 +15,7 @@ let ImagesList: React.FC<ImagesListProps> = ({
   onSelect,
 }) => {
   if (images.length <= 1 || !images) return null;
-  const isLarge = useTailwindBreakpoint("sm");
+  const isLarge = useTailwindBreakpoint("--breakpoint-sm");
 
   return (
     <div

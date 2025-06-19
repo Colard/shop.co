@@ -1,17 +1,5 @@
 import React from "react";
 
-/*
-  Tailwind generate css by files contetnt.
-  So, this constant force TW to generate all basic breakpoints
-*/
-const GENERATING_CSS_VARIABLES = [
-  "--breakpoint-sm",
-  "--breakpoint-md",
-  "--breakpoint-lg",
-  "--breakpoint-xl",
-  "--breakpoint-2xl",
-];
-
 const isBreakpointMatch = (breakpointVar: string) => {
   const remValue = parseInt(
     getComputedStyle(document.documentElement).getPropertyValue(breakpointVar),
@@ -33,7 +21,7 @@ const useTailwindBreakpoint = (breakpointVar: string) => {
 
   React.useEffect(() => {
     const handleResize = () => {
-      setIsBreakpoint(isBreakpointMatch("--breakpoint-" + breakpointVar));
+      setIsBreakpoint(isBreakpointMatch(breakpointVar));
     };
 
     handleResize();

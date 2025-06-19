@@ -22,7 +22,7 @@ let Pagination: React.FC<PaginationProps> = ({
   handlePageChange,
   maxItemsCount,
 }) => {
-  const isLargeScreen = useTailwindBreakpoint("md");
+  const isLargeScreen = useTailwindBreakpoint("--breakpoint-md");
 
   const pageClassName = tw`text-primary/50 relative block aspect-square h-full ${btnCommonClassName}`;
   return (

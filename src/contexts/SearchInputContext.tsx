@@ -28,7 +28,7 @@ interface SearchContextProps {
 const SearchContextProvider: React.FC<SearchContextProps> = ({ children }) => {
   const { data, isLoading, setSearchString } = useProductsSearchApi(10, 500);
   const [isOpen, setIsOpen] = useState(false);
-  const isLargeScreen = useTailwindBreakpoint("md");
+  const isLargeScreen = useTailwindBreakpoint("--breakpoint-md");
   const closeSearch = useCallback(() => setIsOpen(false), []);
   const openSearch = useCallback(() => setIsOpen(true), []);
 
