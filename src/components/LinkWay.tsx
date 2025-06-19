@@ -23,7 +23,7 @@ let LinkWay: React.FC<LinkWayProps> = ({
 
   return (
     <nav
-      className={`${className} base-text flex flex-wrap items-baseline gap-1.5`}
+      className={`${className} base-text flex flex-wrap items-center gap-1.5`}
       {...rest}
     >
       {fullPagePath.map((item, index) => (
@@ -41,7 +41,7 @@ interface LinkWayElementProps {
 }
 
 let LinkWayElement: React.FC<LinkWayElementProps> = ({ pagePath }) => {
-  const unActiveClassName = "cursor-default text-primary";
+  const unActiveClassName = "cursor-default text-primary leading-none";
   if (typeof pagePath === "string") {
     return <span className={`${unActiveClassName}`}>{pagePath}</span>;
   }
@@ -54,7 +54,7 @@ let LinkWayElement: React.FC<LinkWayElementProps> = ({ pagePath }) => {
     <Link
       to={pagePath.path}
       className={
-        "hover:text-primary active:text-primary transition-color duration-300"
+        "hover:text-primary active:text-primary transition-color leading-none duration-300"
       }
     >
       {pagePath.name}
