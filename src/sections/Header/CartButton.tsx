@@ -13,7 +13,7 @@ let CartButton: React.FC<CartButtonProps> = ({ className = "", ...rest }) => {
     <Link to="/cart">
       <div className={`relative ${className}`} {...rest}>
         {items.length > 0 && (
-          <p className="bg-discount absolute -top-2 -right-2 z-1 flex aspect-square min-w-4 items-center justify-center rounded-full p-[1px] text-sm leading-none font-bold">
+          <p className="bg-red absolute -top-2 -right-2 z-1 flex aspect-square min-w-4 items-center justify-center rounded-full p-[1px] text-sm leading-none font-bold">
             {items?.length || 0}
           </p>
         )}

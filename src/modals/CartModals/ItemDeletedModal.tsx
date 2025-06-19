@@ -15,7 +15,7 @@ let ItemDeletedModal: React.FC<ItemDeletedModalProps> = ({
   return (
     <WarningModelBase header="Item Removed!" hideModal={hideModal}>
       <p className="text-lg">
-        You <span className="text-discount">removed</span>{" "}
+        You <span className="text-red">removed</span>{" "}
         <span className="font-bold">"{title}"</span> from cart!
       </p>
 

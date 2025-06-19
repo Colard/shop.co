@@ -12,7 +12,7 @@ let Price: React.FC<PriceProps> = ({ discount, price, className = "" }) => {
       <>
         <p>${priceWithDiscount}</p>
         <p className="text-old-price line-through">${price}</p>
-        <div className="text-discount bg-discount/10 flex h-8 items-center justify-center rounded-full px-3 text-base font-medium md:px-3.5">
+        <div className="text-red bg-red/10 flex h-8 items-center justify-center rounded-full px-3 text-base font-medium md:px-3.5">
           <p>-{discount}%</p>
         </div>
       </>
