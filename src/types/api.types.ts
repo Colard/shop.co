@@ -58,3 +58,12 @@ export interface ProductCategory {
   name: string;
   url?: string;
 }
+
+export interface CartItem {
+  id: number;
+  title: string;
+  price: number;
+  discount: number;
+  thumbnail: string;
+  quantity: number;
+}
