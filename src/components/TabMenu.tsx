@@ -79,7 +79,7 @@ const TabMenu: React.FC<TabMenuProps> = ({
           </button>
         ))}
       </div>
-      <div className="bg-primary/60 relative h-0.5">
+      <div className="bg-primary/10 relative h-0.5">
         <div
           ref={lineRef}
           className="bg-primary absolute bottom-0 h-0.5 transition-all duration-300"

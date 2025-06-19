@@ -15,8 +15,8 @@ let SuccessModalBase: React.FC<ModalProps> = ({
 }) => {
   return (
     <div className="bg-bg-color rounded-2xl p-5">
-      <p className="font-integralcf text-primary flex items-center gap-4 rounded-sm p-2 text-2xl font-bold text-nowrap">
-        <VerificationMark className="text-green h-[1em]" />
+      <p className="font-integralcf text-primary flex items-center gap-4 rounded-sm p-2 text-2xl font-bold">
+        <VerificationMark className="text-green hidden h-[1em] md:block" />
         <span className="leading-none">{header}</span>
       </p>
       <div className="m-5">{children}</div>

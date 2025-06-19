@@ -16,7 +16,7 @@ let WarningModalBase: React.FC<ModalProps> = ({
   return (
     <div className="bg-bg-color rounded-2xl p-5">
       <p className="bg-star-yellow font-integralcf flex items-center gap-4 rounded-sm p-2 text-2xl font-bold text-black">
-        <RiskIcon className="bg-star-yellow h-[1em]"></RiskIcon>{" "}
+        <RiskIcon className="bg-star-yellow hidden h-[1em] md:block"></RiskIcon>{" "}
         <span className="leading-none">{header}</span>
       </p>
       <div className="m-5">{children}</div>

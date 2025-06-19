@@ -52,10 +52,13 @@ const ModalContextProvider: React.FC<ModalContextProps> = ({ children }) => {
 
       {modal && (
         <div
-          className="bg-primary/20 fixed inset-0 z-1000 flex items-center justify-center p-10 backdrop-blur-sm"
+          className="bg-primary/20 fixed inset-0 z-1000 flex items-center justify-center py-10 backdrop-blur-sm md:px-10"
           onClick={hideModal}
         >
-          <div className="relative" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="relative max-w-screen"
+            onClick={(e) => e.stopPropagation()}
+          >
             {modal}
           </div>
         </div>
