@@ -88,7 +88,9 @@ let CartItemCard: React.FC<CartItemCardProps> = ({
 
       {!isLarge && (
         <div className="flex items-center justify-between">
-          <p className="text-card font-bold">${itemPrice * currQuantity}</p>
+          <p className="text-card font-bold">
+            ${(Math.round(itemPrice * currQuantity * 100) / 100).toFixed(2)}
+          </p>
           <QuantitySelector
             value={currQuantity}
             onChangeQuantity={onChangeQuantity}
