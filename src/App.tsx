@@ -8,7 +8,7 @@ import ItemPage from "./pages/ItemPage";
 import NotFound from "./pages/NotFound";
 import { ModalContextProvider } from "./contexts/ModalProviderContext.tsx";
 import APIWarningModalWatcher from "./components/APIWarningModalWatcher.tsx";
-import Cart from "./pages/Cart";
+import Cart from "./pages/Cart/Cart.tsx";
 
 function App() {
   return (

@@ -74,7 +74,9 @@ let CartItemCard: React.FC<CartItemCardProps> = ({
           {/*Item control*/}
           {isLarge && (
             <div className="flex items-center justify-between">
-              <p className="text-card font-bold">${itemPrice}</p>
+              <p className="text-card font-bold">
+                ${itemPrice} x {currQuantity}
+              </p>
               <QuantitySelector
                 value={currQuantity}
                 onChangeQuantity={onChangeQuantity}
@@ -86,7 +88,7 @@ let CartItemCard: React.FC<CartItemCardProps> = ({
 
       {!isLarge && (
         <div className="flex items-center justify-between">
-          <p className="text-card font-bold">${itemPrice}</p>
+          <p className="text-card font-bold">${itemPrice * currQuantity}</p>
           <QuantitySelector
             value={currQuantity}
             onChangeQuantity={onChangeQuantity}

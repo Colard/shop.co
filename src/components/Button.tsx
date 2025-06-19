@@ -11,7 +11,7 @@ let Button: React.FC<ButtonProps> = ({
   return (
     <button
       onClick={onClick}
-      className={`rounded-full transition-all duration-300 hover:scale-95 active:scale-95 ${className}`}
+      className={`flex items-center justify-center rounded-full font-medium transition-all duration-300 hover:scale-95 active:scale-95 ${className}`}
       {...rest}
     >
       {children}
