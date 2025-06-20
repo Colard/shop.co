@@ -16,7 +16,7 @@ const StarRating: React.FC<StarRatingProps> = ({
   bgColor = "var(--color-star-yellow)",
   ...rest
 }) => {
-  const starClassName = tw`block aspect-square h-full mask-[url('src/assets/masks/star.svg')] mask-no-repeat`;
+  const starClassName = tw`block aspect-square h-full mask-[url(/masks/star.svg)] mask-cover mask-no-repeat`;
 
   return (
     <div className={`${className}`} {...rest}>

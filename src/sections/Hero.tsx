@@ -9,7 +9,7 @@ interface HeroProps
 let Hero: React.FC<HeroProps> = ({ className = "", ...rest }) => {
   return (
     <section
-      className={`${className} bg-secondary base-text flex flex-col bg-cover bg-center bg-no-repeat md:bg-[url('src/assets/images/Hero.png')]`}
+      className={`${className} bg-secondary base-text flex flex-col bg-cover bg-center bg-no-repeat md:bg-[url('/Hero.png')]`}
       {...rest}
     >
       <Container className="text-shadow-secondary mt-10 flex flex-1 flex-col justify-center text-shadow-md md:mt-0">

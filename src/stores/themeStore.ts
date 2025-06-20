@@ -4,7 +4,7 @@ import { persist } from "zustand/middleware";
 type Theme = "light" | "dark";
 
 interface ThemeState {
-  theme: Theme;
+  theme: Theme | null;
   toggleTheme: () => void;
   initSystemTheme: () => void;
 }
@@ -12,7 +12,7 @@ interface ThemeState {
 export const useThemeStore = create<ThemeState>()(
   persist(
     (set, get) => ({
-      theme: "light",
+      theme: null,
 
       toggleTheme: () => {
         const newTheme = get().theme === "light" ? "dark" : "light";
