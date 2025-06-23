@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import QuantitySelector from "../../components/QuantitySelector";
 import { Product } from "../../types/api.types";
-import { useCartStore } from "../../stores/cartStore";
 import { useModal } from "../../contexts/ModalProviderContext";
 import NoItemsQuantityModal from "../../modals/CartModals/NoItemsQuantityModal";
 import ItemAddedToCartModal from "../../modals/CartModals/ItemAddedToCartModal";
@@ -10,6 +9,7 @@ import ItemsQuantityChangedModal from "../../modals/CartModals/ItemsQuantityChan
 import ItemDeletedModal from "../../modals/CartModals/ItemDeletedModal";
 import { checkInStok } from "../../utils/productsHeleprs";
 import BinIcon from "../../assets/icons/BinIcon";
+import { useCartActions } from "../../stores/cartStore";
 
 interface InstrumentsFooterProps {
   product: Product | null;
@@ -17,7 +17,7 @@ interface InstrumentsFooterProps {
 
 let InstrumentsFooter: React.FC<InstrumentsFooterProps> = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
-  const { addItem, getItemById, removeItem } = useCartStore();
+  const { addItem, getItemById, removeItem } = useCartActions();
   const { showModal, hideModal } = useModal();
 
   const cartItem = product ? getItemById(product.id) : undefined;

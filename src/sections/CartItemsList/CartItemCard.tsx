@@ -2,10 +2,11 @@ import { memo, useCallback, useState } from "react";
 import BinIcon from "../../assets/icons/BinIcon";
 import Button from "../../components/Button";
 import QuantitySelector from "../../components/QuantitySelector";
-import { useCartStore } from "../../stores/cartStore";
+
 import { CartItem } from "../../types/api.types";
 import { Link } from "react-router-dom";
 import { calcPriceWithDiscound } from "../../utils/productsHeleprs";
+import { useCartActions } from "../../stores/cartStore";
 
 interface CartItemCardProps
   extends Omit<React.ComponentPropsWithoutRef<"article">, "children"> {
@@ -20,7 +21,7 @@ let CartItemCard: React.FC<CartItemCardProps> = ({
   ...rest
 }) => {
   const [currQuantity, setCurrQuantity] = useState(item.quantity);
-  const { removeItem, addItem } = useCartStore();
+  const { removeItem, addItem } = useCartActions();
 
   const onChangeQuantity = useCallback(
     (value: number) => {

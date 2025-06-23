@@ -6,6 +6,7 @@ import useCategoriesApi from "../api/useCategoriesApi";
 import DualIntegerRangeSlider from "../components/DualIntegerRangeSlider";
 import useFilteredData from "../contexts/FilteredDataContext";
 import Button from "../components/Button";
+import useClickOutside from "../hooks/useClickOutside";
 
 interface FiltersProps
   extends Omit<React.ComponentPropsWithoutRef<"aside">, "children"> {
@@ -21,6 +22,9 @@ let Filters: React.FC<FiltersProps> = ({
   const categories = useCategoriesApi();
   const { response, filters } = useFilteredData();
   const navigator = useNavigate();
+
+  const filtersRef = React.useRef<HTMLDivElement>(null);
+  useClickOutside(filtersRef, closing);
 
   const minPrice = response?.minPrice || 0;
   const maxPrice = response?.maxPrice || 0;
@@ -92,6 +96,7 @@ let Filters: React.FC<FiltersProps> = ({
   const headerNameClassName = tw`text-5 font-bold`;
   return (
     <aside
+      ref={filtersRef}
       className={`${className} overflow-x-clip overflow-y-auto px-5 pb-6 lg:px-6 lg:pb-7`}
       {...rest}
     >

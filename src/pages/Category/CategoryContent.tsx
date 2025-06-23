@@ -19,9 +19,14 @@ let Category: React.FC<CategoryProps> = ({ currentPage }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const toggleFilters = useCallback(() => {
-    setAreFiltersOpen((oldFilters) => !oldFilters);
+  const openFilters = useCallback(() => {
+    setAreFiltersOpen(true);
   }, []);
+
+  const closeFilters = useCallback(() => {
+    setAreFiltersOpen(false);
+  }, []);
+
   const { response } = useFilteredData();
 
   const handlePageChange = useCallback(
@@ -37,7 +42,7 @@ let Category: React.FC<CategoryProps> = ({ currentPage }) => {
     <Container className="pt-5 pb-12 md:pt-6 md:pb-20">
       <LinkWay pagePath={["Shop"]} className="mb-3 md:mb-6" />
       <div className="flex">
-        <FiltersOverlay isOpen={areFiltersOpen} onClose={toggleFilters} />
+        <FiltersOverlay isOpen={areFiltersOpen} onClose={closeFilters} />
 
         <div className="ml-0 flex w-full flex-col sm:ml-5">
           <ProductList
@@ -45,7 +50,7 @@ let Category: React.FC<CategoryProps> = ({ currentPage }) => {
             currentPage={currentPage}
             className="flex-1"
             itemsOnPage={PRODUCT_PAGE_SIZE}
-            openFilters={toggleFilters}
+            openFilters={openFilters}
           />
           <hr className="border-primary/10 mt-6 mb-5 md:mt-9" />
 

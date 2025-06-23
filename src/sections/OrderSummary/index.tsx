@@ -1,4 +1,4 @@
-import { useCartStore } from "../../stores/cartStore";
+import { useCartItems } from "../../stores/cartStore";
 import PromoCodeForm from "./PromoCodeForm";
 import ToCheckoutButton from "./ToCheckoutButton";
 
@@ -9,7 +9,7 @@ let OrderSummary: React.FC<OrderSummaryProps> = ({
   className = "",
   ...rest
 }) => {
-  const { items } = useCartStore();
+  const items = useCartItems();
 
   const fullPrice = +items
     .reduce((acc, item) => acc + item.price * item.quantity, 0)

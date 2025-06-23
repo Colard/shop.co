@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import ArrowIcon from "../../assets/icons/ArrowIcon";
 import Button from "../../components/Button";
 import { useModal } from "../../contexts/ModalProviderContext";
-import { useCartStore } from "../../stores/cartStore";
+import { useCartActions } from "../../stores/cartStore";
 import ThanksModal from "../../modals/ThanksModal";
 
 interface ToCheckoutButtonProps
@@ -12,7 +12,7 @@ let ToCheckoutButton: React.FC<ToCheckoutButtonProps> = ({
   className = "",
   ...rest
 }) => {
-  const { clear } = useCartStore();
+  const { clear } = useCartActions();
   const { showModal, hideModal } = useModal();
   const navigate = useNavigate();
 

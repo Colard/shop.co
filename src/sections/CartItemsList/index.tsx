@@ -1,5 +1,6 @@
 import useTailwindBreakpoint from "../../hooks/useTailwindBreakpoint";
-import { useCartStore } from "../../stores/cartStore";
+import { useCartItems } from "../../stores/cartStore";
+
 import CartItemCard from "./CartItemCard";
 
 interface CartItemsListProps
@@ -9,7 +10,7 @@ let CartItemsList: React.FC<CartItemsListProps> = ({
   className = "",
   ...rest
 }) => {
-  const { items } = useCartStore();
+  const items = useCartItems();
   const isLarge = useTailwindBreakpoint("--breakpoint-xs");
 
   return (

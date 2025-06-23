@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import CartIcon from "../../assets/icons/CartIcon";
 import SVGButton from "../../components/SVGButton";
-import { useCartStore } from "../../stores/cartStore";
+import { useCartItems } from "../../stores/cartStore";
 
 interface CartButtonProps
   extends Omit<React.ComponentPropsWithoutRef<"div">, "children"> {}
 
 let CartButton: React.FC<CartButtonProps> = ({ className = "", ...rest }) => {
-  const { items } = useCartStore();
+  const items = useCartItems();
 
   return (
     <Link to="/cart">

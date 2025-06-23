@@ -12,10 +12,6 @@ let FiltersOverlay: React.FC<FiltersOverlayProps> = ({ isOpen, onClose }) => {
   const headerHeight = useHeaderHeight();
   const isLargeScreen = useTailwindBreakpoint("--breakpoint-sm");
 
-  const filterClassName = tw`bg-bg-color border-primary/10 fixed inset-0 z-60 h-full w-full rounded-[1.25rem] border-1 transition-transform duration-300 sm:static sm:z-0 sm:h-min sm:w-50 sm:translate-y-0 lg:w-75`;
-  const filterContainerClassName = tw`bg-primary/20 fixed inset-0 z-60 transition-opacity duration-300 sm:z-0 sm:contents`;
-  const inOpenOnSmallScreen = isOpen && !isLargeScreen;
-
   const styles = useMemo(
     () =>
       isLargeScreen
@@ -30,6 +26,9 @@ let FiltersOverlay: React.FC<FiltersOverlayProps> = ({ isOpen, onClose }) => {
     }
   }, [isOpen, isLargeScreen, onClose]);
 
+  const filterClassName = tw`bg-bg-color border-primary/10 fixed inset-0 z-60 h-full w-full rounded-t-[1.25rem] border-1 transition-transform duration-300 sm:static sm:z-0 sm:h-min sm:w-50 sm:translate-y-0 lg:w-75`;
+  const filterContainerClassName = tw`bg-primary/20 fixed inset-0 z-60 transition-opacity duration-300 sm:z-0 sm:contents`;
+  const inOpenOnSmallScreen = isOpen && !isLargeScreen;
   return (
     <div
       className={`${filterContainerClassName} ${inOpenOnSmallScreen ? "opacity-100" : "opacity-0"} ${isOpen || isLargeScreen ? "pointer-events-auto" : "pointer-events-none"} `}

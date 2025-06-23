@@ -1,12 +1,12 @@
 import CartItemsList from "../../sections/CartItemsList";
 import OrderSummary from "../../sections/OrderSummary";
-import { useCartStore } from "../../stores/cartStore";
+import { useCartItems } from "../../stores/cartStore";
 
 interface CartContentProps
   extends Omit<React.ComponentPropsWithoutRef<"div">, "children"> {}
 
 let CartContent: React.FC<CartContentProps> = ({ className = "" }) => {
-  const { items } = useCartStore();
+  const items = useCartItems();
 
   if (items.length === 0) {
     return (

@@ -1,51 +1,67 @@
-import { create } from "zustand";
+import { create, StateCreator } from "zustand";
 import { persist } from "zustand/middleware";
 import { CartItem } from "../types/api.types";
 
-interface CartState {
+interface TCartState {
   items: CartItem[];
+}
+
+interface TCartActions {
   addItem: (item: CartItem) => boolean;
   removeItem: (id: number) => void;
   clear: () => void;
   getItemById: (id: number) => CartItem | undefined;
 }
 
-export const useCartStore = create<CartState>()(
-  persist(
-    (set, get) => ({
-      items: [],
+type TCartStore = TCartState & TCartActions;
 
-      addItem: (item) => {
-        const existing = get().items.find((i) => i.id === item.id);
+const CartStore: StateCreator<TCartStore> = (set, get) => ({
+  items: [],
 
-        if (item.quantity <= 0) {
-          return false;
-        }
+  addItem: (item) => {
+    const existing = get().items.find((i) => i.id === item.id);
 
-        if (existing) {
-          set({
-            items: get().items.map((i) =>
-              i.id === item.id ? { ...i, quantity: item.quantity } : i,
-            ),
-          });
-          return true;
-        }
+    if (item.quantity <= 0) {
+      return false;
+    }
 
-        set({ items: [...get().items, item] });
-        return true;
-      },
+    if (existing) {
+      set({
+        items: get().items.map((i) =>
+          i.id === item.id ? { ...i, quantity: item.quantity } : i,
+        ),
+      });
+      return true;
+    }
 
-      removeItem: (id) => {
-        set({ items: get().items.filter((i) => i.id !== id) });
-      },
+    set({ items: [...get().items, item] });
+    return true;
+  },
 
-      clear: () => set({ items: [] }),
+  removeItem: (id) => {
+    set({ items: get().items.filter((i) => i.id !== id) });
+  },
 
-      getItemById: (id) => get().items.find((i) => i.id === id),
-    }),
+  clear: () => set({ items: [] }),
 
-    {
-      name: "cart-storage",
-    },
-  ),
+  getItemById: (id) => get().items.find((i) => i.id === id),
+});
+
+const useCartStore = create<TCartStore>()(
+  persist(CartStore, {
+    name: "cart-storage",
+  }),
 );
+
+export function useCartItems(): TCartState["items"] {
+  return useCartStore((state) => state.items);
+}
+
+export function useCartActions(): TCartActions {
+  const addItem = useCartStore((s) => s.addItem);
+  const removeItem = useCartStore((s) => s.removeItem);
+  const clear = useCartStore((s) => s.clear);
+  const getItemById = useCartStore((s) => s.getItemById);
+
+  return { addItem, removeItem, clear, getItemById };
+}
