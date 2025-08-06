@@ -17,7 +17,7 @@ let OrderSummary: React.FC<OrderSummaryProps> = ({
 
   const discountSum = +items
     .reduce((acc, el) => {
-      return acc + (el.price * el.discount) / 100;
+      return acc + ((el.price * el.discount) / 100) * el.quantity;
     }, 0)
     .toFixed(2);
 
